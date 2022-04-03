@@ -1,0 +1,77 @@
+<div class="container-fluid">
+    <div class="title">
+        <h3>register to HealthyApp</h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <form [formGroup]="registerForm" (ngSubmit)="register()">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Username</label>
+                    <input type="text" class="form-control" formControlName="username">
+                </div>
+                <div *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.errors?.['required']" class="alert alert-danger">
+                    Username field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password">
+                </div>
+                <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['required']" class="alert alert-danger">
+                    Password field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="exampleInputPassword1" formControlName="email">
+                </div>
+                <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['required']" class="alert alert-danger">
+                    Email field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="firstName">
+                </div>
+                <div *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.errors?.['required']" class="alert alert-danger">
+                    First Name field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="lastName">
+                </div>
+                <div *ngIf="registerForm.get('lastName')?.touched && registerForm.get('lastName')?.errors?.['required']" class="alert alert-danger">
+                    Last Name field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Age</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="age">
+                </div>
+                <div *ngIf="registerForm.get('age')?.touched && registerForm.get('age')?.errors?.['required']" class="alert alert-danger">
+                    Age field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Gender</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="gender">
+                </div>
+                <div *ngIf="registerForm.get('gender')?.touched && registerForm.get('gender')?.errors?.['required']" class="alert alert-danger">
+                    Gender field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Weight</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="weight">
+                </div>
+                <div *ngIf="registerForm.get('weight')?.touched && registerForm.get('weight')?.errors?.['required']" class="alert alert-danger">
+                    Weight field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Height</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="height">
+                </div>
+                <div *ngIf="registerForm.get('height')?.touched && registerForm.get('height')?.errors?.['required']" class="alert alert-danger">
+                    Height field is required!
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+  </div>

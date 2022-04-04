@@ -73,7 +73,11 @@
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    new Claim("id", user.Id.ToString()),
+                    new Claim(ClaimTypes.Email, user.Email.ToString()),
+                    new Claim("username", user.UserName.ToString()),
+                    new Claim("firstName", user.FirstName.ToString()),
+                    new Claim("lastName", user.LastName.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

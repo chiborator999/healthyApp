@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authServise.login(this.loginForm.value).subscribe(response =>{
-      console.log(response);
+    this.authServise.login(this.loginForm.value).subscribe(response => {
+      this.authServise.saveToken(response['token']);
     //   this.snackbar.open(`${response}`, 'X', {
     //     horizontalPosition: 'center',
     //     verticalPosition: 'bottom',

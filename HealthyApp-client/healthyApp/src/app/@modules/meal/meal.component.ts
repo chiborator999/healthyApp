@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/@shared/services/auth.service';
 import { ErrorHandlerService } from 'src/app/@shared/services/error-handler.service';
 import { MealService } from 'src/app/@shared/services/meal.service';
 import { MealResponseModule } from 'src/app/@shared/models/response/meal-response/meal-response.module';
-import { ProductResponseModule } from 'src/app/@shared/models/response/product-response/product-response.module';
+import { Observable, subscribeOn, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-meal',
@@ -17,27 +17,27 @@ import { ProductResponseModule } from 'src/app/@shared/models/response/product-r
 })
 export class MealComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ['mealType', 'mealCategory', 'products', 'action'];
+  displayedColumns: string[] = ['mealType', 'mealCategory', 'products', 'kCal', 'action'];
   loading: boolean = false;
   meals: MealResponseModule[];
-  products: any// ProductResponseModule[];
+  products: any;
   isUserLoggedIns: boolean;
-
+  userData: any;
+  kcalMealList: Array<any> = [];
+  mealsIds: Array<any> = [];
+  fullName: any;
 
   @ViewChild(MatSort) sort!: MatSort;;
-  
-  
+    
   constructor(
     private mealService: MealService,
-    private errorHandler: ErrorHandlerService,
-    private router: Router,
-    private snackbar: MatSnackBar,
     private authService: AuthService,
-    private errorHandlerService: ErrorHandlerService,   
-    
+    private errorHandler: ErrorHandlerService
     ) { }
     
     ngOnInit(): void {
+      this.userData = this.authService.getUserData();
+      this.fullName = `${this.userData.firstName} ${this.userData.lastName}`
       this.getData();
   }
 
@@ -93,6 +93,9 @@ sortDataAccsesor(item: any, property: any){
 getData(){
     this.mealService.getAll().subscribe(response => {
       this.meals = response as MealResponseModule[]; 
+      this.mealsIds = this.meals.map(m => m.id);
+      this.getMealKCal(this.mealsIds);
+      // this.getMealKCalFromInnerList(3);
       this.dataSource = new MatTableDataSource(this.meals);
       this.dataSource.sort = this.sort;
       this.dataSource.sortingDataAccessor = (item, property) => this.sortDataAccsesor(item, property);  
@@ -104,42 +107,53 @@ getData(){
     //   this.errorHandler.handleRequestError(error);
     //   this.loading = false;
     // });
-}
+  }
 
-add() {
-  console.log("add");
-}
+  getMealKCal(mealsIds:  Array<any>) {
+    let cal = "";
+    let id = mealsIds[1];
+    this.mealService.getKCalById(id).subscribe(response => {
+      cal = response
+      console.log(cal)
+    })
+  }
 
-edit(element: any) {
-  console.log("edit");
-}
-
-  // add(){
-  //   this.router.navigate(['meal/add']);
+  // getMealKCal(mealsIds: Array<any>){  
+  //   let i = mealsIds.length;
+  //   mealsIds.forEach(m => {
+  //    let res = this.mealService.getKCalById(m).subscribe({
+  //       next: response => {
+  //           this.kcalMealList.push({
+  //             id: m,
+  //             kcal: response
+  //           });
+  //           i = i - 1;
+  //       },
+  //       error: error => {
+  //         this.errorHandler.handleRequestError(error);
+  //         console.log(error)
+  //       },
+  //       complete: () => {  
+  //         if(i === 0){
+  //           res.unsubscribe()
+  //         }
+  //       }
+  //     }
+  //   )}
+  //   )
   // }
 
-  // edit(element: any){
-  //   this.router.navigate(['meal/edit', element.id]);
+  // getMealKCalFromInnerList(mealId: any) {
+  //   console.log(mealId);
+  //   console.log(this.kcalMealList);
+  //   this.kcalMealList.filter(m => console.log(m));
+  //   let kcal = this.kcalMealList[0];
+
+  //   console.log(kcal)
   // }
+
+  addToFavarites(e: any) {
   
-  delete(element:any){
-    let result = confirm(`You are about to delete ${element.title}\n\n Are you sure?`);
-    if(result){
-      this.mealService.remove(element.id).subscribe({
-        next: () => {
-          this.getData();
-          this.snackbar.open(`successful delete meal with id: ${element.id}`, 'X', {
-            horizontalPosition: 'center',
-            verticalPosition: 'bottom',
-            panelClass: 'successSnackbar'
-          });
-        },
-        error: error => {
-          this.errorHandler.handleRequestError(error);
-          console.log(error)
-        },
-        complete: () => {      
-        }
-    })}
   }
 }
+

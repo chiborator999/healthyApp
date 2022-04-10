@@ -1,1 +1,70 @@
-<p>profile works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <div class="title">
+                <h2>Profile of {{fullName}}</h2>
+            </div>
+            <form [formGroup]="profileForm" (ngSubmit)="update()">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Username</label>
+                    <input type="text" class="form-control" formControlName="username">
+                </div>
+                <div *ngIf="profileForm.get('username')?.touched && profileForm.get('username')?.errors?.['required']" class="alert alert-danger">
+                    Username field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="exampleInputPassword1" formControlName="email">
+                </div>
+                <div *ngIf="profileForm.get('email')?.touched && profileForm.get('email')?.errors?.['required']" class="alert alert-danger">
+                    Email field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="firstName">
+                </div>
+                <div *ngIf="profileForm.get('firstName')?.touched && profileForm.get('firstName')?.errors?.['required']" class="alert alert-danger">
+                    First Name field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="lastName">
+                </div>
+                <div *ngIf="profileForm.get('lastName')?.touched && profileForm.get('lastName')?.errors?.['required']" class="alert alert-danger">
+                    Last Name field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Age</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="age">
+                </div>
+                <div *ngIf="profileForm.get('age')?.touched && profileForm.get('age')?.errors?.['required']" class="alert alert-danger">
+                    Age field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Gender</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="gender">
+                </div>
+                <div *ngIf="profileForm.get('gender')?.touched && profileForm.get('gender')?.errors?.['required']" class="alert alert-danger">
+                    Gender field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Weight</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="weight">
+                </div>
+                <div *ngIf="profileForm.get('weight')?.touched && profileForm.get('weight')?.errors?.['required']" class="alert alert-danger">
+                    Weight field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Height</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="height">
+                </div>
+                <div *ngIf="profileForm.get('height')?.touched && profileForm.get('height')?.errors?.['required']" class="alert alert-danger">
+                    Height field is required!
+                </div>
+                <button type="submit" class="btn btn-primary">Update profile</button>
+            </form>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+  </div>

@@ -1,0 +1,51 @@
+<div *ngIf='loading'><mat-progress-bar mode='indeterminate'></mat-progress-bar></div>
+<h1>All Product</h1>
+<hr>
+<div class="example-container mat-elevation-z8">
+
+    <div class="row">
+        <div class="col-md-12">
+          <button class="add" mat-raised-button color="primary"  (click)="add()">Add Product</button>
+        </div>
+      </div>    
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="kCal">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> KCal </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.kCal}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="fat">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Fat </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.fat}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="protein">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Protein </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.protein}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="carbohydrate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Carbohydrate </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.carbohydrate}} </mat-cell>
+      </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-raised-button class="edit" (click)="edit(element)">Edit</button>
+        <button mat-raised-button class="delete" (click)="delete(element)">Delete</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+

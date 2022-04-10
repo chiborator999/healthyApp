@@ -1,7 +1,9 @@
 ﻿namespace HealthyApp.Controllers
 {
     using HealthyApp.Data.Models;
+    using HealthyApp.Interfaces;
     using HealthyApp.Models.Identity;
+    using HealthyApp.Models.UserModel;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -14,13 +16,17 @@
     {
         private readonly UserManager<User> userManager;
         private readonly AppSettings appSettings;
+        private readonly ILogService _logService;
 
         public IdentityController(
             UserManager<User> userManager,
-            IOptions<AppSettings> appSettings)
+            IOptions<AppSettings> appSettings,
+            ILogService logService
+            )
         {
             this.userManager = userManager;
             this.appSettings = appSettings.Value;
+            _logService = logService;
         }
         
         [HttpPost]
@@ -89,6 +95,35 @@
             {
                 Token = encryptedToken
             };
+        }
+
+        [HttpGet]
+        [Route(nameof(GetUser))]
+        public async Task<ActionResult<UserViewModel>> GetUser(string userId)
+        {
+            try
+            {
+                var user = await this.userManager.FindByIdAsync(userId);
+
+                var userViewModel = new UserViewModel
+                {
+                    FullName = $"{user.FirstName} {user.LastName}",
+                    Email = user.Email,
+                    UserName = user.UserName,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Age = user.Age,
+                    Gender = user.Gender,
+                    Height = user.Height,
+                    Weight = user.Weight,
+                };
+                
+                return userViewModel;
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(await _logService.LogExceptionAsync(ex));
+            }
         }
     }
 }

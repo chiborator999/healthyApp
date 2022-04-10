@@ -26,23 +26,22 @@ export class BookService {
   }
 
   create(data: any): Observable<any> {
-    return this.http.post(this.createBook, data);
+    return this.http.post(this.createBook, data, {headers: this.headers});
   }
 
   update(data: any): Observable<any> {
-    return this.http.post(this.updateBook, data);
+    return this.http.post(this.updateBook, data, {headers: this.headers});
   }
 
   remove(bookId: any): Observable<any> {
-    return this.http.delete(`${this.removeBook}/${bookId}`);
+    return this.http.delete(this.removeBook + '?bookId=' + bookId, {headers: this.headers});
   }
 
   getById(bookId: any): Observable<any> {
-    return this.http.get(`${this.getBookById}/${bookId}`);
+    return this.http.get(this.getBookById + '?bookId=' + bookId, {headers: this.headers});
   }
 
   getAll(): Observable<any> {
-    return this.http.get(this.getAllBooks);
+    return this.http.get(this.getAllBooks, {headers: this.headers});
   }
-
 }

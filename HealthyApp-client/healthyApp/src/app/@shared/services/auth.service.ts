@@ -15,6 +15,7 @@ export class AuthService {
 
   private loginPath = environment.apiUrl + '/Identity/Login';
   private registerPath = environment.apiUrl + '/Identity/Register';
+  private getUserPath = environment.apiUrl + '/Identity/GetUser';
 
   constructor(private http: HttpClient) { 
     let authToken = sessionStorage.getItem(this.accessToken);
@@ -33,6 +34,10 @@ export class AuthService {
     return this.http.post(this.registerPath, data);
   }
 
+  getUser(userId: any): Observable<any> {
+    return this.http.get(this.getUserPath + '?userId=' + userId, {headers: this.headers});
+  }
+
   logout() {
     localStorage.removeItem(this.accessToken);
     localStorage.removeItem('isLoggedIn');
@@ -48,11 +53,11 @@ export class AuthService {
     return localStorage.getItem(this.accessToken);
   }
 
-  getUserData(): void {
+  getUserData(): any {
     if (this.isAuthenticated()) {
       let token = localStorage.getItem(this.accessToken);
       let decodedToken = jwt_decode(`${token}`);
-      console.log(decodedToken)
+      return decodedToken;
     }
   }
 

@@ -62,6 +62,7 @@ builder.Services.AddTransient<IExerciseService, ExerciseService>(s => new Exerci
 builder.Services.AddTransient<ILogService, LogService>(s => new LogService ( s.GetRequiredService<HealthAppDbContext>() ));
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "HealthyApp Api", Version = "v1" });

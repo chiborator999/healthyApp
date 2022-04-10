@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router'; 
-//import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { MatSort } from '@angular/material/sort';
 import { ViewChild } from '@angular/core';
 import { BookService } from 'src/app/@shared/services/book.service';
@@ -20,13 +19,13 @@ export class BookComponent implements OnInit {
   loading: boolean = false;
   books: any;
   isUserLoggedIns: boolean;
-
+  userData: any;
 
   @ViewChild(MatSort) sort!: MatSort;;
   
   
   constructor(
-    //private errorHandler: ErrorHandlerService,
+    private errorHandler: ErrorHandlerService,
     private router: Router,
     private snackbar: MatSnackBar,
     private bookService: BookService,
@@ -36,6 +35,7 @@ export class BookComponent implements OnInit {
     ) { }
     
     ngOnInit(): void {
+      this.userData = this.authService.getUserData();
       this.getData();
   }
 
@@ -78,17 +78,17 @@ delete(element: any) {
 }
 
   // add(){
-  //   this.router.navigate(['holidays/add']);
+  //   this.router.navigate(['book/add']);
   // }
 
   // edit(element: any){
-  //   this.router.navigate(['holidays/edit', element.id]);
+  //   this.router.navigate(['book/edit', element.id]);
   // }
   
   // delete(element:any){
   //   let result = confirm(`You are about to delete ${element.title}\n\n Are you sure?`);
   //   if(result){
-  //     this.holidayService.deleteHoliday(element.id).subscribe(response => {
+  //     this.bookService.deleteHoliday(element.id).subscribe(response => {
   //       this.getData();
   //       this.snackbar.open(`${response}`, 'X', {
   //         horizontalPosition: 'center',

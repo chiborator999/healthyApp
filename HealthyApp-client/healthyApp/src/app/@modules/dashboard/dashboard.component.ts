@@ -9,12 +9,17 @@ import { AuthService } from 'src/app/@shared/services/auth.service';
 export class DashboardComponent implements OnInit {
 
   userData: any;
-  userFullName: any;
+  fullName: any;
+  userViewModel: any;
+
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     this.userData = this.authService.getUserData();
-    this.userFullName = `${this.userData.firstName} ${this.userData.lastName}`
-    console.log(this.userData)
+    this.fullName = `${this.userData.firstName} ${this.userData.lastName}`
+
+    this.authService.getUser(this.userData.id).subscribe(response => {
+      this.userViewModel = response;
+    })
   }
 }

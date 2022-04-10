@@ -20,6 +20,11 @@ import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './@modules/footer/footer.component';
 import { ErrorHandlerService } from './@shared/services/error-handler.service';
+import { ProductComponent } from './@modules/product/product.component';
+import { MealComponent } from './@modules/meal/meal.component';
+import { ExerciseComponent } from './@modules/exercise/exercise.component';
+import { ProfileComponent } from './@modules/profile/profile.component';
+import { DashboardComponent } from './@modules/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,12 @@ import { ErrorHandlerService } from './@shared/services/error-handler.service';
     LoginComponent,
     RegisterComponent,
     BookComponent,
-    FooterComponent
+    FooterComponent,
+    ProductComponent,
+    MealComponent,
+    ExerciseComponent,
+    ProfileComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

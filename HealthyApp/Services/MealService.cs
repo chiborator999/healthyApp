@@ -7,6 +7,7 @@
     using HealthyApp.Models.ProductModel;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Threading.Tasks;
 
     public class MealService : IMealService
@@ -75,8 +76,83 @@
 
         return mealViewById;
     }
+    public async Task<double> GetMealKCalByIdAsync(int mealId)
+    {
+        var meal = await GetMealByIdAsync(mealId);
 
-    public async Task RemoveMealAsync(int mealId)
+        if (meal is null)
+        {
+            throw new Exception($"Meal with id: {mealId} does not exist!");
+        }
+
+            var KCal = meal.Products.Select(mp => mp.KCal)
+                                       .Sum(f => {
+                                                    double result;
+                                                    Double.TryParse(f.ToString(), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out result);
+                                                    return result;
+                                        });
+
+            return KCal;
+    }
+
+    public async Task<double> GetProteinKCalByIdAsync(int mealId)
+    {
+        var meal = await GetMealByIdAsync(mealId);
+
+        if (meal is null)
+        {
+            throw new Exception($"Meal with id: {mealId} does not exist!");
+        }
+
+        var proteinKCal = meal.Products.Select(mp => mp.Protein)
+                                        .Sum(f => {
+                                            double result;
+                                            Double.TryParse(f.ToString(), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out result);
+                                            return result;
+                                        });
+
+        return proteinKCal;
+    }
+
+    public async Task<double> GetFatKCalByIdAsync(int mealId)
+    {
+        var meal = await GetMealByIdAsync(mealId);
+
+        if (meal is null)
+        {
+            throw new Exception($"Meal with id: {mealId} does not exist!");
+        }
+
+        var fatKCal = meal.Products.Select(mp => mp.Fat)
+                                        .Sum(f => {
+                                            double result;
+                                            Double.TryParse(f.ToString(), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out result);
+                                            return result;
+                                        });
+
+        return fatKCal;
+    }
+
+    public async Task<double> GetCarbohydrateKCalByIdAsync(int mealId)
+    {
+        var meal = await GetMealByIdAsync(mealId);
+
+        if (meal is null)
+        {
+            throw new Exception($"Meal with id: {mealId} does not exist!");
+        }
+
+        var carbohydrateKCal = meal.Products.Select(mp => mp.Carbohydrate)
+                                        .Sum(f => {
+                                            double result;
+                                            Double.TryParse(f.ToString(), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out result);
+                                            return result;
+                                        });
+
+        return carbohydrateKCal;
+    }
+
+        public async Task RemoveMealAsync(int mealId)
     {
         var meal = _ctx.Meals.FirstOrDefault(meal => meal.Id == mealId);
 

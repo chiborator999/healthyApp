@@ -8,6 +8,9 @@ import { AuthService } from 'src/app/@shared/services/auth.service';
 })
 export class HomeComponent implements OnInit {
   isUserLoggedIn: boolean;
+  userData: any;
+  fullName: any;
+
   constructor(
     private authService: AuthService
   ) { }
@@ -18,10 +21,8 @@ export class HomeComponent implements OnInit {
       this.isUserLoggedIn = value;
   }); 
 
-  
-  //   let userData = this.authService.getUserData();
-  //   console.log(userData)
-  // }
+    this.userData = this.authService.getUserData();
+    this.fullName = `${this.userData.firstName} ${this.userData.lastName}`
   }
 
   logout() {

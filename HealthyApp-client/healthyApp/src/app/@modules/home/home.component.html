@@ -7,20 +7,20 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
+          <li class="nav-item" *ngIf="isUserLoggedIn">
+            <a class="nav-link active" aria-current="page" routerLink="/dashboard">Dashboard</a>
           </li>
           <li class="nav-item" *ngIf="isUserLoggedIn">
-            <a class="nav-link" href="#">Profile</a>
+            <a class="nav-link" routerLink="/profile">Profile</a>
           </li>
           <li class="nav-item dropdown" *ngIf="isUserLoggedIn">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Meal
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">My Day Meals</a></li>
-              <li><a class="dropdown-item" href="#">My Favorite Meals</a></li>
-              <li><a class="dropdown-item" href="#">All Meals</a></li>
+              <li><a class="dropdown-item" routerLink="/">My Day Meals</a></li>
+              <li><a class="dropdown-item" routerLink="/">My Favorite Meals</a></li>
+              <li><a class="dropdown-item" routerLink="/meal">All Meals</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown" *ngIf="isUserLoggedIn">
@@ -28,8 +28,8 @@
               Exercise
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">My Exercises</a></li>
-              <li><a class="dropdown-item" href="#">All Exercises</a></li>
+              <li><a class="dropdown-item" routerLink="/">My Exercises</a></li>
+              <li><a class="dropdown-item" routerLink="/exercise">All Exercises</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown" *ngIf="isUserLoggedIn">
@@ -37,9 +37,9 @@
               My Admin Menu
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">Products</a></li>
-              <li><a class="dropdown-item" href="#">Meals</a></li>
-              <li><a class="dropdown-item" href="#">Exercise</a></li>
+              <li><a class="dropdown-item" routerLink="/adminProduct">Products</a></li>
+              <li><a class="dropdown-item" routerLink="/adminMeal">Meals</a></li>
+              <li><a class="dropdown-item" routerLink="/adminExercise">Exercise</a></li>
             </ul>
           </li>
           <li class="nav-item" *ngIf="isUserLoggedIn">
@@ -54,17 +54,10 @@
           <li class="nav-item" *ngIf="isUserLoggedIn">
             <a class="nav-link" href="/" (click)="logout()">Logout</a>
           </li>
+          <li class="nav-item-name" *ngIf="isUserLoggedIn">
+            <span class="nav-link">Welcome, {{fullName}}</span>
+          </li>
         </ul>
       </div>
     </div>
 </nav>
-<!-- <router-outlet>
-  <div class="img">
-    <img src="../../../assets/img/healthyAppMainLogo.png" alt="" class="src">
-</div>
-</router-outlet>
-<br>
-<app-footer></app-footer> -->
-<!-- <div class="img">
-    <img src="../../../assets/img/healthyAppMainLogo.png" alt="" class="src">
-</div> -->

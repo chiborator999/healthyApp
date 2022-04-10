@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       next: response => {
         this.authServise.saveToken(response['token']);
         this.authServise.isUserLoggedIn.emit(true);
-        this.router.navigate(['/']);
+        this.router.navigate(['/dashboard']);
         this.snackbar.open(`login successful`, 'X', {
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
@@ -45,8 +45,7 @@ export class LoginComponent implements OnInit {
         this.errorHandler.handleRequestError(error);
         console.log(error)
       },
-      complete: () => {
-        
+      complete: () => {      
       }
     })}
   }

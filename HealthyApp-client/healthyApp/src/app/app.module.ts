@@ -20,11 +20,14 @@ import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './@modules/footer/footer.component';
 import { ErrorHandlerService } from './@shared/services/error-handler.service';
-import { ProductComponent } from './@modules/product/product.component';
 import { MealComponent } from './@modules/meal/meal.component';
 import { ExerciseComponent } from './@modules/exercise/exercise.component';
 import { ProfileComponent } from './@modules/profile/profile.component';
 import { DashboardComponent } from './@modules/dashboard/dashboard.component';
+import { AdminMealComponent } from './@modules/admin/admin-meal/admin-meal.component';
+import { AdminProductComponent } from './@modules/admin/admin-product/admin-product.component';
+import { AdminExerciseComponent } from './@modules/admin/admin-exercise/admin-exercise.component';
+import { AddProductComponent } from './@modules/admin/admin-product/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -34,11 +37,14 @@ import { DashboardComponent } from './@modules/dashboard/dashboard.component';
     RegisterComponent,
     BookComponent,
     FooterComponent,
-    ProductComponent,
     MealComponent,
     ExerciseComponent,
     ProfileComponent,
     DashboardComponent,
+    AdminMealComponent,
+    AdminProductComponent,
+    AdminExerciseComponent,
+    AddProductComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <div class="title">
+                <h1>Add Product</h1>
+            </div>
+            <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" formControlName="name">
+                </div>
+                <div *ngIf="myForm.get('name')?.touched && myForm.get('name')?.errors?.['required']" class="alert alert-danger">
+                    Name field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="kCal" class="form-label">KCal/100gr.</label>
+                    <input type="text" class="form-control" formControlName="kCal">
+                </div>
+                <div *ngIf="myForm.get('kCal')?.touched && myForm.get('kCal')?.errors?.['required']" class="alert alert-danger">
+                    kCal field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="fat" class="form-label">Fat</label>
+                    <input type="text" class="form-control" formControlName="fat">
+                </div>
+                <div *ngIf="myForm.get('fat')?.touched && myForm.get('fat')?.errors?.['required']" class="alert alert-danger">
+                    Fat field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="protein" class="form-label">Protein</label>
+                    <input type="text" class="form-control" formControlName="protein">
+                </div>
+                <div *ngIf="myForm.get('protein')?.touched && myForm.get('protein')?.errors?.['required']" class="alert alert-danger">
+                    Protein field is required!
+                </div>
+                <div class="mb-3">
+                    <label for="carbohydrate" class="form-label">Carbohydrate</label>
+                    <input type="text" class="form-control" formControlName="carbohydrate">
+                </div>
+                <div *ngIf="myForm.get('carbohydrate')?.touched && myForm.get('carbohydrate')?.errors?.['required']" class="alert alert-danger">
+                    Carbohydrate field is required!
+                </div>              
+                <button type="submit" class="btn btn-primary">Add Product</button>
+            </form>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+  </div>

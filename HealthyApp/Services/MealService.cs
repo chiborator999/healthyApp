@@ -44,7 +44,14 @@
                                             Protein = p.Protein,
                                             Carbohydrate = p.Carbohydrate
                                          }).ToList(),
-            });
+
+                TotalKCal = m.Products.Select(mp => mp.Product.KCal)
+                                       .Sum(f => {
+                                           double result;
+                                           Double.TryParse(f.ToString(), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out result);
+                                           return result;
+                                       }),
+        });
 
             return allMealViewList;
         }
@@ -71,7 +78,13 @@
                                         Fat = p.Fat,
                                         Protein = p.Protein,
                                         Carbohydrate = p.Carbohydrate
-                                    }).ToList()
+                                    }).ToList(),
+            TotalKCal = meal.Products.Select(mp => mp.Product.KCal)
+                                       .Sum(f => {
+                                           double result;
+                                           Double.TryParse(f.ToString(), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out result);
+                                           return result;
+                                       }),
         };
 
         return mealViewById;

@@ -4,6 +4,7 @@
     using HealthyApp.Interfaces;
     using HealthyApp.Models.Identity;
     using HealthyApp.Models.UserModel;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -97,6 +98,7 @@
             };
         }
 
+        [Authorize]
         [HttpGet]
         [Route(nameof(GetUser))]
         public async Task<ActionResult<UserViewModel>> GetUser(string userId)
@@ -126,6 +128,7 @@
             }
         }
 
+        [Authorize]
         [HttpPut]
         [Route(nameof(UpdateUser))]
         public async Task<ActionResult> UpdateUser(UserRequestModel model)

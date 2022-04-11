@@ -1,10 +1,12 @@
 ﻿using HealthyApp.Data.Models;
 using HealthyApp.Interfaces;
 using HealthyApp.Models.ExerciseModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyApp.Controllers
 {
+    [Authorize]
     public class ExerciseController : ApiController
     {
         private readonly IExerciseService _exerciseService;

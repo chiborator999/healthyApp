@@ -1,10 +1,12 @@
 ﻿using HealthyApp.Data.Models;
 using HealthyApp.Interfaces;
 using HealthyApp.Models.ProductModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyApp.Controllers
 {
+    [Authorize]
     public class ProductController : ApiController
     {
         private readonly IProductService _productService;

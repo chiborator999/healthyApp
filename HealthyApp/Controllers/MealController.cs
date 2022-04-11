@@ -1,10 +1,12 @@
 ﻿using HealthyApp.Data.Models;
 using HealthyApp.Interfaces;
 using HealthyApp.Models.MealModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyApp.Controllers
 {
+    [Authorize]
     public class MealController : ApiController
     {
         private readonly IMealService _mealService;
@@ -124,62 +126,6 @@ namespace HealthyApp.Controllers
             try
             {
                 return Ok(await _mealService.GetAllMealsAsync());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(await _logService.LogExceptionAsync(ex));
-            }
-        }
-
-        [HttpGet]
-        [Route(nameof(GetMealKCal))]
-        public async Task<IActionResult> GetMealKCal(int mealId)
-        {
-            try
-            {
-                return Ok(await _mealService.GetMealKCalByIdAsync(mealId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(await _logService.LogExceptionAsync(ex));
-            }
-        }
-
-        [HttpGet]
-        [Route(nameof(GetMealFatKCal))]
-        public async Task<IActionResult> GetMealFatKCal(int mealId)
-        {
-            try
-            {
-                return Ok(await _mealService.GetFatKCalByIdAsync(mealId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(await _logService.LogExceptionAsync(ex));
-            }
-        }
-
-        [HttpGet]
-        [Route(nameof(GetMealProteinKCal))]
-        public async Task<IActionResult> GetMealProteinKCal(int mealId)
-        {
-            try
-            {
-                return Ok(await _mealService.GetProteinKCalByIdAsync(mealId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(await _logService.LogExceptionAsync(ex));
-            }
-        }
-
-        [HttpGet]
-        [Route(nameof(GetMealCarbohydrateKCal))]
-        public async Task<IActionResult> GetMealCarbohydrateKCal(int mealId)
-        {
-            try
-            {
-                return Ok(await _mealService.GetCarbohydrateKCalByIdAsync(mealId));
             }
             catch (Exception ex)
             {

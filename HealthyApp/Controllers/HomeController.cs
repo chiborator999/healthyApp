@@ -9,7 +9,7 @@
         // [Authorize]
         public ActionResult Get()
         {
-            return Ok("Ieaaahhhh");
+            return Ok();
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using HealthyApp.Data.Models;
 using HealthyApp.Interfaces;
 using HealthyApp.Models.BookModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyApp.Controllers
 {
+    [Authorize]
     public class BookController : ApiController
     {
         private readonly IBookService _bookService;

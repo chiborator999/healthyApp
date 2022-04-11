@@ -5,7 +5,10 @@
             <div class="img">
                 <img src="../../../assets/img/healthyAppMainLogo.png" alt="" class="src">
             </div>
-            <div class="user-data">Welcome, {{fullName}}</div>
+            <div class="user-data">Welcome, {{getUserFullName()}}</div>
+            <div class="user-data">Daily Calories Intake: {{userDailyCaloriesIntake}}</div>
+            <div class="user-data">Your BMI index is: {{userBMI}}</div>
+            <div class="user-data">{{BMImessage}}</div>
         </div>
         <div class="col-lg-4"></div>
     </div>

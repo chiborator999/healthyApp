@@ -28,4 +28,8 @@ export class HomeComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
+  
+  getUserFullName() {
+    return this.fullName = this.authService.getUserName();
+  }
 }

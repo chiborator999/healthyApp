@@ -45,22 +45,6 @@ export class MealService {
     return this.http.get(this.getMealById + '?mealId=' + mealId, {headers: this.headers});
   }
 
-  getKCalById(mealId: any): Observable<any> {
-    return this.http.get(this.getMealKCalById + '?mealId=' + mealId, {headers: this.headers});
-  }
-
-  getFatKCalById(mealId: any): Observable<any> {
-    return this.http.get(this.getMealFatKCalById + '?mealId=' + mealId, {headers: this.headers});
-  }
-
-  getProteinKCalById(mealId: any): Observable<any> {
-    return this.http.get(this.getMealProteinKCalById + '?mealId=' + mealId, {headers: this.headers});
-  }
-
-  getCarbohydrateKCalById(mealId: any): Observable<any> {
-    return this.http.get(this.getMealCarbohydrateKCalById + '?mealId=' + mealId, {headers: this.headers});
-  }
-
   getAll(): Observable<any> {
     return this.http.get(this.getAllMeals, {headers: this.headers});
   }

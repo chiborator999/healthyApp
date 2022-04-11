@@ -13,6 +13,7 @@ import { ErrorHandlerService } from 'src/app/@shared/services/error-handler.serv
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss']
 })
+
 export class BookComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ['title', 'author', 'url', 'action'];
@@ -22,84 +23,60 @@ export class BookComponent implements OnInit {
   userData: any;
 
   @ViewChild(MatSort) sort!: MatSort;;
-  
-  
+   
   constructor(
     private errorHandler: ErrorHandlerService,
     private router: Router,
     private snackbar: MatSnackBar,
     private bookService: BookService,
-    private authService: AuthService,
-    private errorHandlerService: ErrorHandlerService,   
-    
+    private authService: AuthService,    
     ) { }
     
-    ngOnInit(): void {
-      this.userData = this.authService.getUserData();
-      this.getData();
+  ngOnInit(): void {
+    this.userData = this.authService.getUserData();
+    this.getData();
   }
 
-sortDataAccsesor(item: any, property: any){
-  switch (property) { 
-    case 'title': return item.title.toUpperCase();
-    case 'author': return item.title.toUpperCase();
-    case 'url': return item.title.toUpperCase();
-    default: return item[property];
+  sortDataAccsesor(item: any, property: any){
+    switch (property) { 
+      case 'title': return item.title.toUpperCase();
+      case 'author': return item.title.toUpperCase();
+      case 'url': return item.title.toUpperCase();
+      default: return item[property];
+    }
   }
-}
 
-getData(){
-    this.bookService.getAll().subscribe(response => {
-      this.books = response; 
-      console.log(this.books)
-      this.dataSource = new MatTableDataSource(this.books); 
-      this.dataSource.sort = this.sort;
-      this.dataSource.sortingDataAccessor = (item, property) => this.sortDataAccsesor(item, property);  
-      this.loading = false;
-    })          
+  getData(){
+      this.bookService.getAll().subscribe(response => {
+        this.books = response; 
+        this.dataSource = new MatTableDataSource(this.books); 
+        this.dataSource.sort = this.sort;
+        this.dataSource.sortingDataAccessor = (item, property) => this.sortDataAccsesor(item, property);  
+        this.loading = false;
+      })
+  }
 
-    // },
-    // error => {
-    //   this.errorHandler.handleRequestError(error);
-    //   this.loading = false;
-    // });
-}
-
-add() {
-  console.log("add");
-}
-
-edit(element: any) {
-  console.log("edit");
-}
-
-delete(element: any) {
-  console.log("delete");
-}
-
-  // add(){
-  //   this.router.navigate(['book/add']);
-  // }
-
-  // edit(element: any){
-  //   this.router.navigate(['book/edit', element.id]);
-  // }
-  
-  // delete(element:any){
-  //   let result = confirm(`You are about to delete ${element.title}\n\n Are you sure?`);
-  //   if(result){
-  //     this.bookService.deleteHoliday(element.id).subscribe(response => {
-  //       this.getData();
-  //       this.snackbar.open(`${response}`, 'X', {
-  //         horizontalPosition: 'center',
-  //         verticalPosition: 'bottom',
-  //         panelClass: 'successSnackbar'
-  //       });
-  //       this.loading = false;
-  //     }, error => {
-  //         this.errorHandlerService.handleRequestError(error);
-  //         this.loading = false;
-  //     });  
-  //     }        
-  //  }
+  add(){
+    this.router.navigate(['/addBook']);
+  }
+    
+  delete(element:any){
+    let result = confirm(`You are about to delete ${element.title}\n\n Are you sure?`);
+    if(result){
+      this.bookService.remove(element.id).subscribe({
+        next: () => {
+          this.getData();
+          this.snackbar.open(`successful delete book with id: ${element.id}`, 'X', {
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom',
+            panelClass: 'successSnackbar'
+          });
+        },
+        error: error => {
+          this.errorHandler.handleRequestError(error);
+          console.log(error)
+        },
+      })
+    }
+  }
 }

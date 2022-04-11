@@ -22,6 +22,22 @@
     background-color: limegreen;
   }
 
+  .edit{
+    float: right;
+  }
+
+  .edit:hover{
+    background-color: limegreen;
+  }
+
+  .delete{
+    float: right;
+  }
+
+  .delete:hover{
+    background-color: rgb(218, 44, 44);
+  }
+
   a{
     text-decoration: none;
     color: blue;

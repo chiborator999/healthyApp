@@ -3,32 +3,29 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from 'src/app/@shared/services/error-handler.service';
-import { ProductService } from 'src/app/@shared/services/product.service';
 import { AuthService } from 'src/app/@shared/services/auth.service';
+import { BookService } from 'src/app/@shared/services/book.service';
 
 @Component({
-  selector: 'app-add-product',
-  templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.scss']
+  selector: 'app-add-book',
+  templateUrl: './add-book.component.html',
+  styleUrls: ['./add-book.component.scss']
 })
-
-export class AddProductComponent implements OnInit {
+export class AddBookComponent implements OnInit {
   myForm: FormGroup = new FormGroup({});
   loading = true;
   userData: any;
 
   constructor( private router: Router,
-    private productService: ProductService,
+    private bookService: BookService,
     private authService: AuthService,
     private errorHandler: ErrorHandlerService,
     private snackbar: MatSnackBar,
   ) {
-    this.myForm = new FormGroup({
-      name: new FormControl("", Validators.required),
-      kCal: new FormControl("",Validators.required),
-      fat: new FormControl("",Validators.required),
-      protein: new FormControl("",Validators.required),
-      carbohydrate: new FormControl("",Validators.required),
+      this.myForm = new FormGroup({
+        title: new FormControl("", Validators.required),
+        author: new FormControl("",Validators.required),
+        url: new FormControl("",Validators.required),
     });
   }
     
@@ -38,9 +35,7 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit(data: any): void{
-    this.productService.create({Name: data.name, KCal: data.kCal, 
-                                Fat: data.fat, Protein: data.protein, 
-                                Carbohydrate: data.carbohydrate })
+    this.bookService.create({Title: data.title, Author: data.author, Url: data.url })
       .subscribe({ 
         next: response => {
           this.snackbar.open(`${response}`, 'X', {
@@ -48,7 +43,7 @@ export class AddProductComponent implements OnInit {
             verticalPosition: 'bottom',
             panelClass: 'successSnackbar'
           });
-          this.router.navigate(['/adminProduct'])
+          this.router.navigate(['/book'])
         },
         error: error => {
           this.errorHandler.handleRequestError(error);

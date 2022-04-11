@@ -125,5 +125,29 @@
                 return BadRequest(await _logService.LogExceptionAsync(ex));
             }
         }
+
+        [HttpPut]
+        [Route(nameof(UpdateUser))]
+        public async Task<ActionResult> UpdateUser(UserRequestModel model)
+        {
+            var user = await this.userManager.FindByNameAsync(model.UserName);
+
+            user.Email = model.Email;
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Age = model.Age;
+            user.Gender = model.Gender;
+            user.Height = model.Height;          
+            user.Weight = model.Weight;
+
+            var result = await this.userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                return Ok($"Successfuly updated User with username: {user.UserName}");
+            }
+
+            return BadRequest(result.Errors);
+        }
     }
 }

@@ -28,6 +28,9 @@ import { AdminMealComponent } from './@modules/admin/admin-meal/admin-meal.compo
 import { AdminProductComponent } from './@modules/admin/admin-product/admin-product.component';
 import { AdminExerciseComponent } from './@modules/admin/admin-exercise/admin-exercise.component';
 import { AddProductComponent } from './@modules/admin/admin-product/add-product/add-product.component';
+import { AddBookComponent } from './@modules/book/add-book/add-book.component';
+import { AddExerciseComponent } from './@modules/admin/admin-exercise/add-exercise/add-exercise.component';
+import { AddMealComponent } from './@modules/admin/admin-meal/add-meal/add-meal.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,9 @@ import { AddProductComponent } from './@modules/admin/admin-product/add-product/
     AdminProductComponent,
     AdminExerciseComponent,
     AddProductComponent,
+    AddBookComponent,
+    AddExerciseComponent,
+    AddMealComponent,
   ],
   imports: [
     BrowserModule,

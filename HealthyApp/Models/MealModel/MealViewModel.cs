@@ -13,5 +13,7 @@
         public MealCategory MealCategory { get; set; }
 
         public List<ProductViewModel> Products { get; set; } = new List<ProductViewModel>();
+
+        public double TotalKCal { get; set; }
     }
 }

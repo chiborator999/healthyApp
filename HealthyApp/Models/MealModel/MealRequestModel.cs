@@ -1,7 +1,7 @@
 ﻿namespace HealthyApp.Models.MealModel
 {
     using HealthyApp.Data.Enum;
-    using HealthyApp.Data.Models;
+    using HealthyApp.Models.MealProductModel;
 
     public class MealRequestModel
     {
@@ -11,6 +11,6 @@
 
         public MealCategory MealCategory { get; set; }
 
-        public HashSet<MealProduct> Products { get; set; } = new HashSet<MealProduct>();
+        public HashSet<MealProductRequestModel> Products { get; set; } = new HashSet<MealProductRequestModel>();
     }
 }

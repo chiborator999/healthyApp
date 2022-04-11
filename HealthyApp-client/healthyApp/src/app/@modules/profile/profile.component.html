@@ -5,14 +5,7 @@
             <div class="title">
                 <h2>Profile of {{fullName}}</h2>
             </div>
-            <form [formGroup]="profileForm" (ngSubmit)="update()">
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Username</label>
-                    <input type="text" class="form-control" formControlName="username">
-                </div>
-                <div *ngIf="profileForm.get('username')?.touched && profileForm.get('username')?.errors?.['required']" class="alert alert-danger">
-                    Username field is required!
-                </div>
+            <form [formGroup]="profileForm" (ngSubmit)="update(profileForm.value)">
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Email</label>
                     <input type="email" class="form-control" id="exampleInputPassword1" formControlName="email">

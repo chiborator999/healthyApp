@@ -19,7 +19,7 @@ export class AuthService {
   private updateUserPath = environment.apiUrl + '/Identity/UpdateUser';
 
   constructor(private http: HttpClient) { 
-    let authToken = sessionStorage.getItem(this.accessToken);
+    let authToken = localStorage.getItem(this.accessToken);
     this.headers =  new HttpHeaders()
     .set('Accept', 'application/json')
     .set('Access-Control-Allow-Headers', 'Content-Type')

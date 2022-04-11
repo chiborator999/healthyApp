@@ -16,7 +16,7 @@ export class BookService {
   private getAllBooks = environment.apiUrl + '/Book/GetAll';
 
   constructor(private http: HttpClient) { 
-    let authToken = sessionStorage.getItem('token');
+    let authToken = localStorage.getItem('token');
     this.headers =  new HttpHeaders()
     .set('Accept', 'application/json')
     .set('Access-Control-Allow-Headers', 'Content-Type')

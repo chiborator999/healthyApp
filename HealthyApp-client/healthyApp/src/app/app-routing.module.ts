@@ -14,24 +14,23 @@ import { LoginComponent } from './@modules/login/login.component';
 import { MealComponent } from './@modules/meal/meal.component';
 import { ProfileComponent } from './@modules/profile/profile.component';
 import { RegisterComponent } from './@modules/register/register.component';
+import { AuthGuardService } from './@shared/services/auth-guard.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'book', component: BookComponent },
-  { path: 'addBook', component: AddBookComponent },
-  { path: 'meal', component: MealComponent },
-  { path: 'addMeal', component: AddMealComponent },
-  { path: 'exercise', component: ExerciseComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'adminMeal', component: AdminMealComponent },
-  { path: 'adminProduct', component: AdminProductComponent },
-  { path: 'addProduct', component: AddProductComponent },
-  { path: 'adminExercise', component: AdminExerciseComponent },
-  { path: 'addExercise', component: AddExerciseComponent },
-
-  //  path: 'createMeal', component: HomeComponent, canActivate: [AuthGuardService]}
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
+  { path: 'book', component: BookComponent, canActivate: [AuthGuardService] },
+  { path: 'addBook', component: AddBookComponent, canActivate: [AuthGuardService] },
+  { path: 'meal', component: MealComponent, canActivate: [AuthGuardService] },
+  { path: 'addMeal', component: AddMealComponent, canActivate: [AuthGuardService] },
+  { path: 'exercise', component: ExerciseComponent, canActivate: [AuthGuardService] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
+  { path: 'adminMeal', component: AdminMealComponent, canActivate: [AuthGuardService] },
+  { path: 'adminProduct', component: AdminProductComponent, canActivate: [AuthGuardService] },
+  { path: 'addProduct', component: AddProductComponent, canActivate: [AuthGuardService] },
+  { path: 'adminExercise', component: AdminExerciseComponent, canActivate: [AuthGuardService] },
+  { path: 'addExercise', component: AddExerciseComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({

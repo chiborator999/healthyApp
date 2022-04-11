@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router'; 
 import { MatSort } from '@angular/material/sort';
 import { ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/@shared/services/auth.service';
-import { ErrorHandlerService } from 'src/app/@shared/services/error-handler.service';
 import { MealService } from 'src/app/@shared/services/meal.service';
 import { MealResponseModule } from 'src/app/@shared/models/response/meal-response/meal-response.module';
-import { Observable, subscribeOn, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-meal',
@@ -32,7 +28,6 @@ export class MealComponent implements OnInit {
   constructor(
     private mealService: MealService,
     private authService: AuthService,
-    private errorHandler: ErrorHandlerService
     ) { }
     
     ngOnInit(): void {
@@ -92,65 +87,14 @@ sortDataAccsesor(item: any, property: any){
 
 getData(){
     this.mealService.getAll().subscribe(response => {
-      this.meals = response as MealResponseModule[]; 
+      this.meals = response as MealResponseModule[];
       this.mealsIds = this.meals.map(m => m.id);
-      this.getMealKCal(this.mealsIds);
-      // this.getMealKCalFromInnerList(3);
       this.dataSource = new MatTableDataSource(this.meals);
       this.dataSource.sort = this.sort;
       this.dataSource.sortingDataAccessor = (item, property) => this.sortDataAccsesor(item, property);  
       this.loading = false;
-    })          
-
-    // },
-    // error => {
-    //   this.errorHandler.handleRequestError(error);
-    //   this.loading = false;
-    // });
-  }
-
-  getMealKCal(mealsIds:  Array<any>) {
-    let cal = "";
-    let id = mealsIds[1];
-    this.mealService.getKCalById(id).subscribe(response => {
-      cal = response
-      console.log(cal)
     })
   }
-
-  // getMealKCal(mealsIds: Array<any>){  
-  //   let i = mealsIds.length;
-  //   mealsIds.forEach(m => {
-  //    let res = this.mealService.getKCalById(m).subscribe({
-  //       next: response => {
-  //           this.kcalMealList.push({
-  //             id: m,
-  //             kcal: response
-  //           });
-  //           i = i - 1;
-  //       },
-  //       error: error => {
-  //         this.errorHandler.handleRequestError(error);
-  //         console.log(error)
-  //       },
-  //       complete: () => {  
-  //         if(i === 0){
-  //           res.unsubscribe()
-  //         }
-  //       }
-  //     }
-  //   )}
-  //   )
-  // }
-
-  // getMealKCalFromInnerList(mealId: any) {
-  //   console.log(mealId);
-  //   console.log(this.kcalMealList);
-  //   this.kcalMealList.filter(m => console.log(m));
-  //   let kcal = this.kcalMealList[0];
-
-  //   console.log(kcal)
-  // }
 
   addToFavarites(e: any) {
   

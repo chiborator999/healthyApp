@@ -22,20 +22,20 @@ export class AddProductComponent implements OnInit {
     private authService: AuthService,
     private errorHandler: ErrorHandlerService,
     private snackbar: MatSnackBar,
-    ) {
-      this.myForm = new FormGroup({
-        name: new FormControl("", Validators.required),
-        kCal: new FormControl("",Validators.required),
-        fat: new FormControl("",Validators.required),
-        protein: new FormControl("",Validators.required),
-        carbohydrate: new FormControl("",Validators.required),
-      });
-    }
+  ) {
+    this.myForm = new FormGroup({
+      name: new FormControl("", Validators.required),
+      kCal: new FormControl("",Validators.required),
+      fat: new FormControl("",Validators.required),
+      protein: new FormControl("",Validators.required),
+      carbohydrate: new FormControl("",Validators.required),
+    });
+  }
     
-    ngOnInit(): void {
-      this.userData = this.authService.getUserData();
-      this.loading = false;
-    }
+  ngOnInit(): void {
+    this.userData = this.authService.getUserData();
+    this.loading = false;
+  }
 
   onSubmit(data: any): void{
     this.productService.create({Name: data.name, KCal: data.kCal, 
@@ -54,6 +54,7 @@ export class AddProductComponent implements OnInit {
           this.errorHandler.handleRequestError(error);
           console.log(error)
         }
-    });
+      }
+    );
   }
 }

@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+                <div class="mealType">
+                    <select class="mealType-select" formControlName="mealType">
+                        <option value="" disabled>Choose mealType</option>
+                        <option value="0">Breakfast</option>
+                        <option value="1">Lunch</option>
+                        <option value="2">Dinner</option>    
+                    </select>
+                </div>
+                <div class="mealCategory">
+                    <select class="mealCategory-select" formControlName="mealCategory">
+                        <option value="" disabled>Choose mealCategory</option>
+                        <option value="0">Vegan</option>
+                        <option value="1">Vegetarian</option>
+                        <option value="2">Pescetarian</option>
+                        <option value="3">Meat</option> 
+                    </select>
+                </div>               
+                <div class="products-checkbox">
+                    <label *ngFor="let product of products">
+                        <input type="checkbox" class="checkbox" (change)="getSelectedValue(product)" />
+                        <span>{{ product.name }} / {{ product.kCal }} kcal</span>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Meal</button>
+            </form>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+form {
+    border: 3px solid rgba($color: #37be4e, $alpha: 1.0);
+    border-radius: 10px;
+    padding: 10% 15%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+
+    .alert {
+        font-size: 14px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+}
+
+.mealType {
+    margin-top: 20px;
+}
+
+.mealCategory {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Mulish";
+
+    input[type="checkbox"] {
+        width: 14px !important;
+        height: 14px !important;
+        margin: 5px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        outline: 1px solid gray;
+        box-shadow: none;
+        font-size: 20px;
+        font-weight: 600;
+        font-family: "Mulish";
+        text-align: center;
+        line-height: 1em;
+        background: #ffff;
+    }
+
+    input[type="checkbox"]:checked:after {
+        content: "✔";
+        color: #5fa382;
+    }
+
+    input {
+        vertical-align: top;
+        font-size: 14px;
+        font-weight: 600;
+        font-family: "Mulish";
+    }
+
+    span {
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 600;
+        font-family: "Mulish";
+    }
+}

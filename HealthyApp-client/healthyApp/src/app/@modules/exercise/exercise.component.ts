@@ -6,8 +6,6 @@ import { MatSort } from '@angular/material/sort';
 import { ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/@shared/services/auth.service';
 import { ErrorHandlerService } from 'src/app/@shared/services/error-handler.service';
-import { MealResponseModule } from 'src/app/@shared/models/response/meal-response/meal-response.module';
-import { ProductResponseModule } from 'src/app/@shared/models/response/product-response/product-response.module';
 import { ExerciseService } from 'src/app/@shared/services/exercise.service';
 import { ExeciseResponseModule } from 'src/app/@shared/models/response/execise-response/execise-response.module';
 
@@ -16,6 +14,7 @@ import { ExeciseResponseModule } from 'src/app/@shared/models/response/execise-r
   templateUrl: './exercise.component.html',
   styleUrls: ['./exercise.component.scss']
 })
+
 export class ExerciseComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ['name', 'kCalSpent', 'action'];
@@ -23,39 +22,35 @@ export class ExerciseComponent implements OnInit {
   exercises: any;
   userData: any;
 
-
   @ViewChild(MatSort) sort!: MatSort;;
-  
-  
+   
   constructor(
     private exerciseService: ExerciseService,
     private errorHandler: ErrorHandlerService,
     private router: Router,
     private snackbar: MatSnackBar,
-    private authService: AuthService,
-    private errorHandlerService: ErrorHandlerService,   
+    private authService: AuthService,  
+  ) { }
     
-    ) { }
-    
-    ngOnInit(): void {
-      this.userData = this.authService.getUserData();
-      this.getData();
+  ngOnInit(): void {
+    this.userData = this.authService.getUserData();
+    this.getData();
   }
 
-getProductsName(products: Array<any>) {
- let result = products.map(p => p.name);
- return result;
-}  
+  getProductsName(products: Array<any>) {
+  let result = products.map(p => p.name);
+  return result;
+  }  
 
-sortDataAccsesor(item: any, property: any){
-  switch (property) { 
-    case 'Name': return item.title.toUpperCase();
-    case 'kCalSpent': return item.title.toUpperCase();
-    default: return item[property];
+  sortDataAccsesor(item: any, property: any){
+    switch (property) { 
+      case 'Name': return item.title.toUpperCase();
+      case 'kCalSpent': return item.title.toUpperCase();
+      default: return item[property];
+    }
   }
-}
 
-getData(){
+  getData(){
     this.exerciseService.getAll().subscribe(response => {
       this.exercises = response as ExeciseResponseModule[]; 
       this.dataSource = new MatTableDataSource(this.exercises);
@@ -63,30 +58,12 @@ getData(){
       this.dataSource.sortingDataAccessor = (item, property) => this.sortDataAccsesor(item, property);  
       this.loading = false;
     })          
+  }
 
-    // },
-    // error => {
-    //   this.errorHandler.handleRequestError(error);
-    //   this.loading = false;
-    // });
-}
-
-add() {
-  console.log("add");
-}
-
-edit(element: any) {
-  console.log("edit");
-}
-
-  // add(){
-  //   this.router.navigate(['meal/add']);
-  // }
-
-  // edit(element: any){
-  //   this.router.navigate(['meal/edit', element.id]);
-  // }
-  
+  add(elementId: any) {
+    console.log("add");
+  }
+    
   delete(element:any){
     let result = confirm(`You are about to delete ${element.title}\n\n Are you sure?`);
     if(result){
@@ -103,9 +80,8 @@ edit(element: any) {
           this.errorHandler.handleRequestError(error);
           console.log(error)
         },
-        complete: () => {      
-        }
-    })}
+      })
+    }
   }
 }
 

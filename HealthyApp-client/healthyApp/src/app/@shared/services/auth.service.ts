@@ -16,6 +16,7 @@ export class AuthService {
   private loginPath = environment.apiUrl + '/Identity/Login';
   private registerPath = environment.apiUrl + '/Identity/Register';
   private getUserPath = environment.apiUrl + '/Identity/GetUser';
+  private updateUserPath = environment.apiUrl + '/Identity/UpdateUser';
 
   constructor(private http: HttpClient) { 
     let authToken = sessionStorage.getItem(this.accessToken);
@@ -26,6 +27,7 @@ export class AuthService {
     .set('Access-Control-Allow-Origin', '*')
     .set('Authorization', 'Bearer ' + authToken);
   }
+
   login(data: any): Observable<any> {
     return this.http.post(this.loginPath, data);
   }
@@ -34,8 +36,18 @@ export class AuthService {
     return this.http.post(this.registerPath, data);
   }
 
+  updateUser(data: any): Observable<any> {
+    return this.http.put(this.updateUserPath, data, {headers: this.headers});
+  }
+
   getUser(userId: any): Observable<any> {
     return this.http.get(this.getUserPath + '?userId=' + userId, {headers: this.headers});
+  }
+
+  getUserName(): string {
+    let userData = this.getUserData();
+    let fullName = `${userData.firstName} ${userData.lastName}`;
+    return fullName;
   }
 
   logout() {

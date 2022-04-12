@@ -19,10 +19,8 @@ export class HomeComponent implements OnInit {
 
     this.authService.isUserLoggedIn.subscribe( value => {
       this.isUserLoggedIn = value;
-  }); 
-
+    }); 
     this.userData = this.authService.getUserData();
-    this.fullName = `${this.userData.firstName} ${this.userData.lastName}`
   }
 
   logout() {

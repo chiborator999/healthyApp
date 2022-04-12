@@ -17,6 +17,7 @@ export class AuthService {
   private registerPath = environment.apiUrl + '/Identity/Register';
   private getUserPath = environment.apiUrl + '/Identity/GetUser';
   private updateUserPath = environment.apiUrl + '/Identity/UpdateUser';
+  private addExerciseToUserPath = environment.apiUrl + '/Identity/AddExerciseToUser';
 
   constructor(private http: HttpClient) { 
     let authToken = localStorage.getItem(this.accessToken);
@@ -79,5 +80,9 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  addExerciseToUser(data: any): Observable<any> {
+    return this.http.post(this.addExerciseToUserPath, data, {headers: this.headers});
   }
 }

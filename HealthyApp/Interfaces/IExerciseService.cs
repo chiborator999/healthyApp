@@ -7,6 +7,7 @@
     {
         Task<IEnumerable<ExerciseViewModel>> GetAllExercisesAsync();
         Task<ExerciseViewModel> GetExerciseByIdAsync(int exerciseId);
+        Task<Exercise> GetExerciseToUserByIdAsync(int exerciseId);
         Task CreateExerciseAsync(Exercise exercise);
         Task UpdateExerciseAsync(Exercise exercise);
         Task RemoveExerciseAsync(int exerciseId);

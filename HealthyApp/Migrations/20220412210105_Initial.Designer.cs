@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace HealthyApp.Data.Migrations
+namespace HealthyApp.Migrations
 {
     [DbContext(typeof(HealthAppDbContext))]
-    [Migration("20220327214359_ManyToManyAdded")]
-    partial class ManyToManyAdded
+    [Migration("20220412210105_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,21 @@ namespace HealthyApp.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("BookUser", b =>
+                {
+                    b.Property<int>("BooksId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UsersId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("BooksId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("BookUser");
+                });
 
             modelBuilder.Entity("HealthyApp.Data.Models.Book", b =>
                 {
@@ -44,12 +59,7 @@ namespace HealthyApp.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Books");
                 });
@@ -117,14 +127,24 @@ namespace HealthyApp.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("Id");
+
+                    b.ToTable("Exercises");
+                });
+
+            modelBuilder.Entity("HealthyApp.Data.Models.ExerciseUser", b =>
+                {
+                    b.Property<int>("ExerciseId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ExerciseId", "UserId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Exercises");
+                    b.ToTable("ExerciseUsers");
                 });
 
             modelBuilder.Entity("HealthyApp.Data.Models.Meal", b =>
@@ -141,12 +161,7 @@ namespace HealthyApp.Data.Migrations
                     b.Property<int>("MealType")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Meals");
                 });
@@ -284,6 +299,21 @@ namespace HealthyApp.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("MealUser", b =>
+                {
+                    b.Property<int>("MealsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UsersId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("MealsId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("MealUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -417,31 +447,44 @@ namespace HealthyApp.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("HealthyApp.Data.Models.Book", b =>
+            modelBuilder.Entity("BookUser", b =>
                 {
+                    b.HasOne("HealthyApp.Data.Models.Book", null)
+                        .WithMany()
+                        .HasForeignKey("BooksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("HealthyApp.Data.Models.User", null)
-                        .WithMany("Books")
-                        .HasForeignKey("UserId");
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("HealthyApp.Data.Models.Exercise", b =>
+            modelBuilder.Entity("HealthyApp.Data.Models.ExerciseUser", b =>
                 {
-                    b.HasOne("HealthyApp.Data.Models.User", null)
-                        .WithMany("Exercises")
-                        .HasForeignKey("UserId");
-                });
+                    b.HasOne("HealthyApp.Data.Models.Exercise", "Exercise")
+                        .WithMany("ExerciseUser")
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("HealthyApp.Data.Models.Meal", b =>
-                {
-                    b.HasOne("HealthyApp.Data.Models.User", null)
-                        .WithMany("Meals")
-                        .HasForeignKey("UserId");
+                    b.HasOne("HealthyApp.Data.Models.User", "User")
+                        .WithMany("ExerciseUser")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exercise");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("HealthyApp.Data.Models.MealProduct", b =>
                 {
                     b.HasOne("HealthyApp.Data.Models.Meal", "Meal")
-                        .WithMany("MealProducts")
+                        .WithMany("Products")
                         .HasForeignKey("MealId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -455,6 +498,21 @@ namespace HealthyApp.Data.Migrations
                     b.Navigation("Meal");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("MealUser", b =>
+                {
+                    b.HasOne("HealthyApp.Data.Models.Meal", null)
+                        .WithMany()
+                        .HasForeignKey("MealsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HealthyApp.Data.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -508,9 +566,14 @@ namespace HealthyApp.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HealthyApp.Data.Models.Exercise", b =>
+                {
+                    b.Navigation("ExerciseUser");
+                });
+
             modelBuilder.Entity("HealthyApp.Data.Models.Meal", b =>
                 {
-                    b.Navigation("MealProducts");
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("HealthyApp.Data.Models.Product", b =>
@@ -520,11 +583,7 @@ namespace HealthyApp.Data.Migrations
 
             modelBuilder.Entity("HealthyApp.Data.Models.User", b =>
                 {
-                    b.Navigation("Books");
-
-                    b.Navigation("Exercises");
-
-                    b.Navigation("Meals");
+                    b.Navigation("ExerciseUser");
                 });
 #pragma warning restore 612, 618
         }

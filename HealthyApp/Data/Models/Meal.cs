@@ -11,5 +11,7 @@
         public MealCategory MealCategory { get; set; }
 
         public ICollection<MealProduct> Products { get; set; } = new HashSet<MealProduct>();
+
+        public ICollection<User> Users { get; set; }
     }
 }

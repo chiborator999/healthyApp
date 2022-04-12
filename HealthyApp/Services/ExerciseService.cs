@@ -74,5 +74,24 @@
             _ctx.Entry(exercise).State = EntityState.Modified;
             await _ctx.SaveChangesAsync();
         }
+
+        public async Task<Exercise> GetExerciseToUserByIdAsync(int exerciseId)
+        {
+            var exercise = await _ctx.Exercises.AsNoTracking().FirstOrDefaultAsync(exercise => exercise.Id == exerciseId);
+
+            if (exercise is null)
+            {
+                throw new Exception($"Exercise with id: {exerciseId} does not exist!");
+            }
+
+            var exerciseViewById = new Exercise
+            {
+                Id = exercise.Id,
+                Name = exercise.Name,
+                KCalSpent = exercise.KCalSpent
+            };
+
+            return exerciseViewById;
+        }
     }
 }

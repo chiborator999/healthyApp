@@ -16,9 +16,13 @@
             base.OnModelCreating(builder);
 
             builder.Entity<MealProduct>().HasKey(mp => new { mp.MealId, mp.ProductId });
-
             builder.Entity<MealProduct>().HasOne(m => m.Meal).WithMany(mp => mp.Products).HasForeignKey(mp => mp.MealId);
             builder.Entity<MealProduct>().HasOne(p => p.Product).WithMany(mp => mp.MealProducts).HasForeignKey(mp => mp.ProductId);
+
+
+            builder.Entity<ExerciseUser>().HasKey(eu => new { eu.ExerciseId, eu.UserId });
+            builder.Entity<ExerciseUser>().HasOne(e => e.Exercise).WithMany(u => u.ExerciseUser).HasForeignKey(e => e.ExerciseId);
+            builder.Entity<ExerciseUser>().HasOne(u => u.User).WithMany(u => u.ExerciseUser).HasForeignKey(u => u.UserId);
         }
 
         public DbSet<Product> Products { get; set; }
@@ -32,5 +36,7 @@
         public DbSet<CustomException> CustomExceptions { get; set; }
 
         public DbSet<MealProduct> MealProducts { get; set; }
+
+        public DbSet<ExerciseUser> ExerciseUsers { get; set; }
     }
 }

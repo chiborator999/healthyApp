@@ -2,6 +2,7 @@
 {
     using HealthyApp.Data.Models;
     using HealthyApp.Interfaces;
+    using HealthyApp.Models.ExerciseModel;
     using HealthyApp.Models.Identity;
     using HealthyApp.Models.UserModel;
     using Microsoft.AspNetCore.Authorization;
@@ -17,16 +18,19 @@
     {
         private readonly UserManager<User> userManager;
         private readonly AppSettings appSettings;
+        private readonly IUserService _userService;
         private readonly ILogService _logService;
 
         public IdentityController(
             UserManager<User> userManager,
             IOptions<AppSettings> appSettings,
+            IUserService userService,
             ILogService logService
             )
         {
             this.userManager = userManager;
             this.appSettings = appSettings.Value;
+            _userService = userService;
             _logService = logService;
         }
         
@@ -45,7 +49,7 @@
                 Weight = model.Weight,
                 Height = model.Height
             };
-
+            //await this.userManager.AddToRoleAsync(user, "User");
             var result = await this.userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
@@ -98,7 +102,6 @@
             };
         }
 
-        [Authorize]
         [HttpGet]
         [Route(nameof(GetUser))]
         public async Task<ActionResult<UserViewModel>> GetUser(string userId)
@@ -151,6 +154,36 @@
             }
 
             return BadRequest(result.Errors);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route(nameof(AddExerciseToUser))]
+        public async Task<IActionResult> AddExerciseToUser([FromBody] AddExerciseToUserRequestModel model)
+        {
+            try
+            {
+                await _userService.AddExerciseToUserAsync(model.exerciseId, model.userId);
+                return Ok($"Successfuly added Exercise to user with id: {model.userId}");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(await _logService.LogExceptionAsync(ex));
+            }
+        }
+
+        [HttpGet]
+        [Route(nameof(GetUserExercises))]
+        public async Task<IActionResult> GetUserExercises(string userId)
+        {
+            try
+            {
+                return Ok(await _userService.GetAllExercisesAsync(userId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(await _logService.LogExceptionAsync(ex));
+            }
         }
     }
 }

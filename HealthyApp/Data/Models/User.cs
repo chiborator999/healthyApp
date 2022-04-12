@@ -9,7 +9,7 @@
         {
             this.Meals = new HashSet<Meal>();
             this.Books = new HashSet<Book>();
-            this.Exercises = new HashSet<Exercise>();
+            this.ExerciseUser = new HashSet<ExerciseUser>();
         }
 
         [Required]
@@ -29,7 +29,7 @@
 
         public ICollection<Meal> Meals { get; set; }
 
-        public ICollection<Exercise> Exercises { get; set; }
+        public ICollection<ExerciseUser> ExerciseUser { get; set; }
 
         public ICollection<Book> Books { get; set; }
     }

@@ -34,6 +34,7 @@ export class ExerciseComponent implements OnInit {
     
   ngOnInit(): void {
     this.userData = this.authService.getUserData();
+    console.log(this.userData)
     this.getData();
   }
 
@@ -45,7 +46,7 @@ export class ExerciseComponent implements OnInit {
   sortDataAccsesor(item: any, property: any){
     switch (property) { 
       case 'Name': return item.title.toUpperCase();
-      case 'kCalSpent': return item.title.toUpperCase();
+      case 'kCal Spent': return item.title.toUpperCase();
       default: return item[property];
     }
   }
@@ -61,7 +62,10 @@ export class ExerciseComponent implements OnInit {
   }
 
   add(elementId: any) {
-    console.log("add");
+    let data = { exerciseId: elementId, userId: this.userData.id }
+    this.authService.addExerciseToUser(data).subscribe(response => {
+      console.log(response)
+    })
   }
     
   delete(element:any){

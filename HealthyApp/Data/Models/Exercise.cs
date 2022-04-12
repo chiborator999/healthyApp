@@ -11,5 +11,7 @@
 
         [Required]
         public string KCalSpent { get; set; }
+
+        public ICollection<ExerciseUser> ExerciseUser { get; set; }
     }
 }

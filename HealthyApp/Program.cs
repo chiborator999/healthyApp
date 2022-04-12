@@ -59,6 +59,7 @@ builder.Services.AddTransient<IProductService, ProductService>(s => new ProductS
 builder.Services.AddTransient<IMealService, MealService>(s => new MealService ( s.GetRequiredService<HealthAppDbContext>() ));
 builder.Services.AddTransient<IBookService, BookService>(s => new BookService ( s.GetRequiredService<HealthAppDbContext>() ));
 builder.Services.AddTransient<IExerciseService, ExerciseService>(s => new ExerciseService( s.GetRequiredService<HealthAppDbContext>() ));
+builder.Services.AddTransient<IUserService, UserService>(s => new UserService( s.GetRequiredService<HealthAppDbContext>() ));
 builder.Services.AddTransient<ILogService, LogService>(s => new LogService ( s.GetRequiredService<HealthAppDbContext>() ));
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

@@ -23,6 +23,10 @@
             builder.Entity<ExerciseUser>().HasKey(eu => new { eu.ExerciseId, eu.UserId });
             builder.Entity<ExerciseUser>().HasOne(e => e.Exercise).WithMany(u => u.ExerciseUser).HasForeignKey(e => e.ExerciseId);
             builder.Entity<ExerciseUser>().HasOne(u => u.User).WithMany(u => u.ExerciseUser).HasForeignKey(u => u.UserId);
+
+            builder.Entity<MealUser>().HasKey(mu => new { mu.MealId, mu.UserId });
+
+            builder.Entity<BookUser>().HasKey(bu => new { bu.BookId, bu.UserId });
         }
 
         public DbSet<Product> Products { get; set; }
@@ -38,5 +42,9 @@
         public DbSet<MealProduct> MealProducts { get; set; }
 
         public DbSet<ExerciseUser> ExerciseUsers { get; set; }
+
+        public DbSet<MealUser> MealUsers { get; set; }
+
+        public DbSet<BookUser> BookUsers { get; set; }
     }
 }

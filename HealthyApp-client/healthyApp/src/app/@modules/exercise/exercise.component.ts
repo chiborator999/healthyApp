@@ -34,7 +34,6 @@ export class ExerciseComponent implements OnInit {
     
   ngOnInit(): void {
     this.userData = this.authService.getUserData();
-    console.log(this.userData)
     this.getData();
   }
 

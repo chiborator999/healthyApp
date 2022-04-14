@@ -80,8 +80,8 @@ export class AdminMealComponent implements OnInit {
 
   sortDataAccsesor(item: any, property: any){
     switch (property) { 
-      case 'mealType': return item.title.toUpperCase();
-      case 'mealCategory': return item.title.toUpperCase();
+      case 'Meal Type': return item.title.toUpperCase();
+      case 'Meal Category': return item.title.toUpperCase();
       default: return item[property];
     }
   }

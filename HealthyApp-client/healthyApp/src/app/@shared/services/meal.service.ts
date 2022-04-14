@@ -13,11 +13,8 @@ export class MealService {
   private updateMeal = environment.apiUrl + '/Meal/Update';
   private removeMeal = environment.apiUrl + '/Meal/Remove';
   private getMealById = environment.apiUrl + '/Meal/GetById';
-  private getMealKCalById = environment.apiUrl + '/Meal/GetMealKCal';
-  private getMealFatKCalById = environment.apiUrl + '/Meal/GetMealFatKCal';
-  private getMealProteinKCalById = environment.apiUrl + '/Meal/GetMealProteinKCal';
-  private getMealCarbohydrateKCalById = environment.apiUrl + '/Meal/GetMealCarbohydrateKCal';
   private getAllMeals = environment.apiUrl + '/Meal/GetAll';
+  private getUserMealsPath = environment.apiUrl + '/Identity/GetUserMeals';
 
   constructor(private http: HttpClient) { 
     let authToken = localStorage.getItem('token');
@@ -47,5 +44,9 @@ export class MealService {
 
   getAll(): Observable<any> {
     return this.http.get(this.getAllMeals, {headers: this.headers});
+  }
+
+  getUserMeals(userId: any): Observable<any> {
+    return this.http.get(this.getUserMealsPath + '?userId=' + userId, {headers: this.headers});
   }
 }

@@ -1,5 +1,5 @@
 <div *ngIf='loading'><mat-progress-bar mode='indeterminate'></mat-progress-bar></div>
-<h1>All Meal</h1>
+<h1>My Day Meals</h1>
 <hr>
 <div class="example-container mat-elevation-z8">
 
@@ -16,23 +16,27 @@
     </ng-container>
     
     <ng-container matColumnDef="products">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Products </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Products </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{getProductsName(element.products)}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="kCal">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> KCal </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> KCal </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.totalKCal}} </mat-cell>
       </ng-container>
 
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button mat-raised-button class="add" (click)="addMealToUser(element.id)">Add to My Day meal</button>
+        <button mat-raised-button class="delete" (click)="delete(element)">Delete</button>
       </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+  <div class="total-kcal">
+    <span>Total: {{mealsTotalKCal}} KCal</span> 
+  </div>
 </div>
+

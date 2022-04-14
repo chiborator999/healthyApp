@@ -9,11 +9,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorHandlerService } from 'src/app/@shared/services/error-handler.service';
 
 @Component({
-  selector: 'app-meal',
-  templateUrl: './meal.component.html',
-  styleUrls: ['./meal.component.scss']
+  selector: 'app-my-day-meal',
+  templateUrl: './my-day-meal.component.html',
+  styleUrls: ['./my-day-meal.component.scss']
 })
-export class MealComponent implements OnInit {
+
+export class MyDayMealComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ['mealType', 'mealCategory', 'products', 'kCal', 'action'];
   loading: boolean = false;
@@ -21,9 +22,12 @@ export class MealComponent implements OnInit {
   products: any;
   isUserLoggedIns: boolean;
   userData: any;
-  kcalMealList: Array<any> = [];
   mealsIds: Array<any> = [];
   fullName: any;
+  userId: any;
+  mealsKCalList: any;
+  mealsTotalKCal: any;
+
 
   @ViewChild(MatSort) sort!: MatSort;;
     
@@ -36,6 +40,7 @@ export class MealComponent implements OnInit {
     
     ngOnInit(): void {
       this.userData = this.authService.getUserData();
+      this.userId = this.userData.id;
       this.fullName = `${this.userData.firstName} ${this.userData.lastName}`
       this.getData();
   }
@@ -84,16 +89,16 @@ sortDataAccsesor(item: any, property: any){
   switch (property) { 
     case 'Meal Type': return item.title.toUpperCase();
     case 'Meal Category': return item.title.toUpperCase();
-    case 'Products': return item.title.toUpperCase();
-    case 'KCal': return item.title.toUpperCase();
     default: return item[property];
   }
 }
 
 getData(){
-    this.mealService.getAll().subscribe(response => {
+    this.mealService.getUserMeals(this.userId).subscribe(response => {
       this.meals = response as MealResponseModule[];
       this.mealsIds = this.meals.map(m => m.id);
+      this.mealsKCalList = this.meals.map(m => m.totalKCal);
+      this.mealsTotalKCal = this.getTotalDayMealsKCal(this.mealsKCalList);
       this.dataSource = new MatTableDataSource(this.meals);
       this.dataSource.sort = this.sort;
       this.dataSource.sortingDataAccessor = (item, property) => this.sortDataAccsesor(item, property);  
@@ -101,26 +106,28 @@ getData(){
     })
   }
 
-  addMealToUser(elementId: any) {
-    let data = { mealId: elementId, userId: this.userData.id }
-    this.authService.addMealToUser(data).subscribe({
-      next: () => {
-        this.snackbar.open(`successful added meal with id: ${elementId} to your day meals`, 'X', {
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom',
-          panelClass: 'successSnackbar'
-        });
-      },
-      error: error => {
-        this.errorHandler.handleRequestError(error);
-        this.snackbar.open(`Meal cannot be added to: ${this.fullName} meals`, 'X', {
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom',
-          panelClass: 'dangerSnackbar'
-        });
-        console.log(error)
-      },
-    })
+  getTotalDayMealsKCal(kCalArray: Array<string>): number {
+    var sumTotalKCal = kCalArray.reduce((acc, cur) => acc + Number(cur), 0);
+    return sumTotalKCal;
+  }
+
+  delete(element:any){
+    let result = confirm(`You are about to delete ${element.title}\n\n Are you sure?`);
+    if(result){
+      this.mealService.remove(element.id).subscribe({
+        next: () => {
+          this.getData();
+          this.snackbar.open(`successful delete meal with id: ${element.id}`, 'X', {
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom',
+            panelClass: 'successSnackbar'
+          });
+        },
+        error: error => {
+          this.errorHandler.handleRequestError(error);
+          console.log(error)
+        },
+      })
+    }
   }
 }
-

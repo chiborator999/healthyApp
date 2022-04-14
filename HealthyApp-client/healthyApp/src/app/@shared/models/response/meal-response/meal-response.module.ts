@@ -7,4 +7,5 @@ export class MealResponseModule {
   mealType: MealTypeResponseModule;
   mealCategory: MealCategoryResponseModule;
   products: Array<ProductResponseModule>;
+  totalKCal: Array<string>;
  }

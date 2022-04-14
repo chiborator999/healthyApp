@@ -10,17 +10,21 @@ import { ExerciseService } from 'src/app/@shared/services/exercise.service';
 import { ExeciseResponseModule } from 'src/app/@shared/models/response/execise-response/execise-response.module';
 
 @Component({
-  selector: 'app-exercise',
-  templateUrl: './exercise.component.html',
-  styleUrls: ['./exercise.component.scss']
+  selector: 'app-my-exercise',
+  templateUrl: './my-exercise.component.html',
+  styleUrls: ['./my-exercise.component.scss']
 })
 
-export class ExerciseComponent implements OnInit {
+export class MyExerciseComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ['name', 'kCalSpent', 'action'];
   loading: boolean = false;
   exercises: any;
   userData: any;
+  userId: any;
+  fullName: any;
+  totalKCal: any;
+  totalKCalSpent: any;
 
   @ViewChild(MatSort) sort!: MatSort;;
    
@@ -34,6 +38,7 @@ export class ExerciseComponent implements OnInit {
     
   ngOnInit(): void {
     this.userData = this.authService.getUserData();
+    this.userId = this.userData.id;
     this.getData();
   }
 
@@ -46,8 +51,10 @@ export class ExerciseComponent implements OnInit {
   }
 
   getData(){
-    this.exerciseService.getAll().subscribe(response => {
+    this.exerciseService.getUserExercise(this.userId).subscribe(response => {
       this.exercises = response as ExeciseResponseModule[]; 
+      this.totalKCal = this.exercises.map((e: any) => e.kCalSpent);
+      this.totalKCalSpent = this.getTotalKCalSpent(this.totalKCal);
       this.dataSource = new MatTableDataSource(this.exercises);
       this.dataSource.sort = this.sort;
       this.dataSource.sortingDataAccessor = (item, property) => this.sortDataAccsesor(item, property);  
@@ -55,35 +62,18 @@ export class ExerciseComponent implements OnInit {
     })          
   }
 
-  add(elementId: any) {
-    let data = { exerciseId: elementId, userId: this.userData.id }
-    this.authService.addExerciseToUser(data).subscribe({
-      next: () => {
-        this.snackbar.open(`successful added exercise with id: ${elementId} to your exercises`, 'X', {
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom',
-          panelClass: 'successSnackbar'
-        });
-      },
-      error: error => {
-        this.errorHandler.handleRequestError(error);
-        this.snackbar.open(`Exercise cannot be added to user with id: ${this.userData.id}`, 'X', {
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom',
-          panelClass: 'dangerSnackbar'
-        });
-        console.log(error)
-      },
-    })
+  getTotalKCalSpent(kCalArray: Array<string>): number {
+    var sumTotalKCal = kCalArray.reduce((acc, cur) => acc + Number(cur), 0);
+    return sumTotalKCal;
   }
     
   delete(element:any){
     let result = confirm(`You are about to delete ${element.title}\n\n Are you sure?`);
-    if (result) {
+    if(result){
       this.exerciseService.remove(element.id).subscribe({
         next: () => {
           this.getData();
-          this.snackbar.open(`successful delete exercise with id: ${element.id}`, 'X', {
+          this.snackbar.open(`successful delete meal with id: ${element.id}`, 'X', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
             panelClass: 'successSnackbar'
@@ -96,5 +86,8 @@ export class ExerciseComponent implements OnInit {
       })
     }
   }
-}
 
+  getUserFullName() {
+    return this.fullName = this.authService.getUserName();
+  }
+}

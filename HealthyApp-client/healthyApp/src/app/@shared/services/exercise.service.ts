@@ -14,6 +14,7 @@ export class ExerciseService {
   private removeExercise = environment.apiUrl + '/Exercise/Remove';
   private getExerciseById = environment.apiUrl + '/Exercise/GetById';
   private getAllExercises = environment.apiUrl + '/Exercise/GetAll';
+  private getUserExercisesPath = environment.apiUrl + '/Identity/GetUserExercises';
 
   constructor(private http: HttpClient) { 
     let authToken = localStorage.getItem('token');
@@ -43,5 +44,9 @@ export class ExerciseService {
 
   getAll(): Observable<any> {
     return this.http.get(this.getAllExercises, {headers: this.headers});
+  }
+
+  getUserExercise(userId: any): Observable<any> {
+    return this.http.get(this.getUserExercisesPath + '?userId=' + userId, {headers: this.headers});
   }
 }

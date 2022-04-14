@@ -1,0 +1,31 @@
+<div *ngIf='loading'><mat-progress-bar mode='indeterminate'></mat-progress-bar></div>
+<h1>{{getUserFullName()}}`s Exercise</h1>
+<hr>
+<div class="example-container mat-elevation-z8"> 
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="kCalSpent">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> KCal Spent </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.kCalSpent}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-raised-button class="delete" (click)="delete(element)">Delete</button>
+        </mat-cell>
+      </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <div class="total-kcal-spent">
+    <span>Total: {{totalKCalSpent}} KCal / 10 minutes</span>
+  </div>
+</div>

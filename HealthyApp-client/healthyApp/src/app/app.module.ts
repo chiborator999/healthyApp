@@ -31,6 +31,8 @@ import { AddProductComponent } from './@modules/admin/admin-product/add-product/
 import { AddBookComponent } from './@modules/book/add-book/add-book.component';
 import { AddExerciseComponent } from './@modules/admin/admin-exercise/add-exercise/add-exercise.component';
 import { AddMealComponent } from './@modules/admin/admin-meal/add-meal/add-meal.component';
+import { MyExerciseComponent } from './@modules/exercise/my-exercise/my-exercise.component';
+import { MyDayMealComponent } from './@modules/meal/my-day-meal/my-day-meal.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { AddMealComponent } from './@modules/admin/admin-meal/add-meal/add-meal.
     AddBookComponent,
     AddExerciseComponent,
     AddMealComponent,
+    MyExerciseComponent,
+    MyDayMealComponent,
   ],
   imports: [
     BrowserModule,

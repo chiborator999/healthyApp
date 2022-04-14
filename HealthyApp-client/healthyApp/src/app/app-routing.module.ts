@@ -10,8 +10,10 @@ import { AddBookComponent } from './@modules/book/add-book/add-book.component';
 import { BookComponent } from './@modules/book/book.component';
 import { DashboardComponent } from './@modules/dashboard/dashboard.component';
 import { ExerciseComponent } from './@modules/exercise/exercise.component';
+import { MyExerciseComponent } from './@modules/exercise/my-exercise/my-exercise.component';
 import { LoginComponent } from './@modules/login/login.component';
 import { MealComponent } from './@modules/meal/meal.component';
+import { MyDayMealComponent } from './@modules/meal/my-day-meal/my-day-meal.component';
 import { ProfileComponent } from './@modules/profile/profile.component';
 import { RegisterComponent } from './@modules/register/register.component';
 import { AuthGuardService } from './@shared/services/auth-guard.service';
@@ -23,8 +25,10 @@ const routes: Routes = [
   { path: 'book', component: BookComponent, canActivate: [AuthGuardService] },
   { path: 'addBook', component: AddBookComponent, canActivate: [AuthGuardService] },
   { path: 'meal', component: MealComponent, canActivate: [AuthGuardService] },
+  { path: 'myDayMeal', component: MyDayMealComponent, canActivate: [AuthGuardService] },
   { path: 'addMeal', component: AddMealComponent, canActivate: [AuthGuardService] },
   { path: 'exercise', component: ExerciseComponent, canActivate: [AuthGuardService] },
+  { path: 'myExercise', component: MyExerciseComponent, canActivate: [AuthGuardService] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'adminMeal', component: AdminMealComponent, canActivate: [AuthGuardService] },
   { path: 'adminProduct', component: AdminProductComponent, canActivate: [AuthGuardService] },

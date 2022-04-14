@@ -185,5 +185,36 @@
                 return BadRequest(await _logService.LogExceptionAsync(ex));
             }
         }
+
+        [Authorize]
+        [HttpPost]
+        [Route(nameof(AddMealToUser))]
+        public async Task<IActionResult> AddMealToUser([FromBody] AddMealToUserRequestModel model)
+        {
+            try
+            {
+                await _userService.AddMealToUserAsync(model.mealId, model.userId);
+                return Ok($"Successfuly added Meal to user with id: {model.userId}");
+            }
+            catch (Exception ex)
+            {
+                var exception = new Exception(ex.Message);
+                return BadRequest(await _logService.LogExceptionAsync(exception));
+            }
+        }
+
+        [HttpGet]
+        [Route(nameof(GetUserMeals))]
+        public async Task<IActionResult> GetUserMeals(string userId)
+        {
+            try
+            {
+                return Ok(await _userService.GetAllMealsAsync(userId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(await _logService.LogExceptionAsync(ex));
+            }
+        }
     }
 }

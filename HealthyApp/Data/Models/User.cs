@@ -7,7 +7,7 @@
     {
         public User()
         {
-            this.Meals = new HashSet<Meal>();
+            this.MealUsers = new HashSet<MealUser>();
             this.Books = new HashSet<Book>();
             this.ExerciseUser = new HashSet<ExerciseUser>();
         }
@@ -27,7 +27,7 @@
 
         public double Height { get; set; }
 
-        public ICollection<Meal> Meals { get; set; }
+        public ICollection<MealUser> MealUsers { get; set; }
 
         public ICollection<ExerciseUser> ExerciseUser { get; set; }
 

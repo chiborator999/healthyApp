@@ -1,15 +1,59 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4">
-            <div class="img">
-                <img src="../../../assets/img/healthyAppMainLogo.png" alt="" class="src">
-            </div>
-            <div class="user-data">Welcome, {{getUserFullName()}}</div>
-            <div class="user-data">Daily Calories Intake: {{userDailyCaloriesIntake}}</div>
-            <div class="user-data">Your BMI index is: {{userBMI}}</div>
-            <div class="user-data">{{BMImessage}}</div>
-        </div>
-        <div class="col-lg-4"></div>
-    </div>
+<div class="container-fluid" fxLayout="column" fxLayoutAlign="space-evenly center">
+    <div class="user-data">Welcome, {{getUserFullName()}}</div>
+    <mat-accordion>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+            <mat-panel-title>
+                Daily Calories Intake: {{userDailyCaloriesIntake}}
+            </mat-panel-title>
+            <mat-panel-description>
+                What is Harris Benedict equation based on?
+            </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>The Daily Calories Intake was determined using three methods.<br>
+                In men, the Harris-Benedict equation formula used was:<br>
+                BMR=66.4730 + 13.7516 x weight in kg + 5.0033 x height in cm – 6.7550 x age in years.<br>
+                In women,<br>
+                BMR=655.0955 + 9.5634 x weight in kg + 1.8496 x height in cm – 4.6756 x age in years.</p>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+            <mat-panel-title>              
+                Your BMI index is: {{userBMI}}
+            </mat-panel-title>
+            <mat-panel-description>
+                How BMI is calculated?
+            </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>Body Mass Index is a simple calculation using a person's height and weight.<br>
+                The formula is BMI = kg/m2 where kg is a person's weight in kilograms<br>
+                and m2 is their height in metres squared.<br>
+                A BMI of 25.0 or more is overweight, while the healthy range is 18.5 to 24.9.<br>
+                BMI applies to most adults 18-65 years.</p>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+            <mat-panel-title>              
+                {{BMImessage}}
+            </mat-panel-title>
+            <mat-panel-description>
+                What does Thats mean?
+            </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p *ngIf="this.userBMI >= 18.5 && this.userBMI <= 24.9">
+                Body Mass Index is a simple calculation using a person's height and weight.<br>
+                The formula is BMI = kg/m2 where kg is a person's weight in kilograms<br>
+                and m2 is their height in metres squared.<br>
+                A BMI of 25.0 or more is overweight, while the healthy range is 18.5 to 24.9.<br>
+                BMI applies to most adults 18-65 years.</p>
+        </mat-expansion-panel>
+
+        </mat-accordion>
+    <!-- <div class="user-data">Welcome, {{getUserFullName()}}</div>
+    <div class="user-data">Daily Calories Intake: {{userDailyCaloriesIntake}}</div>
+    <div class="user-data">Your BMI index is: {{userBMI}}</div>
+    <div class="user-data">{{BMImessage}}</div> -->
   </div>

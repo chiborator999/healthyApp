@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   userBMI: any;
   BMImessage: any;
   userDailyCaloriesIntake: any;
+  panelOpenState = false;
 
   constructor(private authService: AuthService) { }
 

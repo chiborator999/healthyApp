@@ -21,6 +21,7 @@ export class BookComponent implements OnInit {
   books: any;
   isUserLoggedIns: boolean;
   userData: any;
+  isAdmin: boolean;
 
   @ViewChild(MatSort) sort!: MatSort;;
    
@@ -32,8 +33,13 @@ export class BookComponent implements OnInit {
     private authService: AuthService,    
     ) { }
     
-  ngOnInit(): void {
-    this.userData = this.authService.getUserData();
+  ngOnInit(): void {;
+    this.authService.isUserAdmin.subscribe( value => {
+      this.userData = value;
+      if(this.userData.role === 'Admin'){
+        this.isAdmin = true;
+      }
+    });
     this.getData();
   }
 

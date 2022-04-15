@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EventEmitter, Input, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import jwt_decode from 'jwt-decode';
 
@@ -10,6 +10,7 @@ import jwt_decode from 'jwt-decode';
 })
 export class AuthService {
   @Output() isUserLoggedIn = new EventEmitter<boolean>();
+  @Output() isUserAdmin = new EventEmitter<string>();
   headers: HttpHeaders;
   accessToken = 'token';
 
@@ -60,7 +61,6 @@ export class AuthService {
   saveToken(token: any) {
     localStorage.setItem(this.accessToken, token);
     localStorage.setItem("isLoggedIn", "true");
-    // sessionStorage.setItem(this.accessToken, token);
   }
 
   getToken() {
@@ -71,6 +71,7 @@ export class AuthService {
     if (this.isAuthenticated()) {
       let token = localStorage.getItem(this.accessToken);
       let decodedToken = jwt_decode(`${token}`);
+      this.isUserAdmin.emit(decodedToken as string);
       return decodedToken;
     }
   }

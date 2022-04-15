@@ -10,24 +10,32 @@ export class HomeComponent implements OnInit {
   isUserLoggedIn: boolean;
   userData: any;
   fullName: any;
+  isAdmin: boolean;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
 
+    this.authService.isUserAdmin.subscribe( value => {
+      this.userData = value;
+      if(this.userData.role === 'Admin'){
+        this.isAdmin = true;
+      }
+    });
+
     this.authService.isUserLoggedIn.subscribe( value => {
       this.isUserLoggedIn = value;
     }); 
-    this.userData = this.authService.getUserData();
+    
   }
 
   logout() {
     this.authService.logout();
   }
   
-  getUserFullName() {
+  getUserFullName(): string {
     return this.fullName = this.authService.getUserName();
   }
 }

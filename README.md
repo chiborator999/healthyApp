@@ -9,7 +9,8 @@ User can monitor your BMI as well as daily calorie needs.\
 Only administrator can add products, meals and exercises!
 
 #### The app is build on:
-  FE => `Angular: 13.2.7`\
+  FE => `Angular: 13.2.7` - can be found in "HealthyApp-client/healthyApp"
+  
   BE =>
     `AspNetCore -> 6.3.0,`\
     `EntityFrameworkCore -> 6.0.1`\

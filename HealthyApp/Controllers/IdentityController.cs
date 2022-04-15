@@ -89,6 +89,7 @@
                     new Claim("username", user.UserName.ToString()),
                     new Claim("firstName", user.FirstName.ToString()),
                     new Claim("lastName", user.LastName.ToString()),
+                    new Claim("role", user.Role.Value.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

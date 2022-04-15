@@ -35,12 +35,11 @@
 
             var model = new ExerciseUser { Exercise = exercise, ExerciseId = exercise.Id, User = user, UserId = user.Id};
 
-            var exerciseUser = _ctx.Exercises.Include(e => e.ExerciseUser.FirstOrDefault(model));
-            //if (exerciseUser != null)
-            //{
-            //    throw new Exception($"Exercise with id: {exerciseId} is already in user list!");
-            //}
-
+            var exerciseUser = _ctx.ExerciseUsers.Select(e => e.ExerciseId == exercise.Id && e.UserId == user.Id).FirstOrDefault();
+            if (exerciseUser)
+            {
+                throw new Exception($"Exercise with id: {exerciseId} is already in user list!");
+            }
 
             user.ExerciseUser.Add(model);
             await _ctx.SaveChangesAsync();
@@ -77,7 +76,7 @@
             var model = new MealUser { Meal = meal, MealId = meal.Id, User = user, UserId = user.Id };
 
             bool mealUser = _ctx.MealUsers.Select(m => m.MealId == meal.Id && m.UserId == user.Id).FirstOrDefault();
-            if (mealUser != null)
+            if (mealUser)
             {
                 throw new Exception($"Meal with id: {meal.Id} is already in user list!");
             }

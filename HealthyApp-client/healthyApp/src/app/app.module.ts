@@ -33,6 +33,7 @@ import { AddExerciseComponent } from './@modules/admin/admin-exercise/add-exerci
 import { AddMealComponent } from './@modules/admin/admin-meal/add-meal/add-meal.component';
 import { MyExerciseComponent } from './@modules/exercise/my-exercise/my-exercise.component';
 import { MyDayMealComponent } from './@modules/meal/my-day-meal/my-day-meal.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { MyDayMealComponent } from './@modules/meal/my-day-meal/my-day-meal.comp
     HttpClientModule,
     AngularMaterialModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    FlexLayoutModule,
   ],
   providers: [
     AuthService, 

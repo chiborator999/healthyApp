@@ -17,6 +17,7 @@ import { MyDayMealComponent } from './@modules/meal/my-day-meal/my-day-meal.comp
 import { ProfileComponent } from './@modules/profile/profile.component';
 import { RegisterComponent } from './@modules/register/register.component';
 import { AuthGuardService } from './@shared/services/auth-guard.service';
+import { RoleGuardService } from './@shared/services/role-guard.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,15 +27,15 @@ const routes: Routes = [
   { path: 'addBook', component: AddBookComponent, canActivate: [AuthGuardService] },
   { path: 'meal', component: MealComponent, canActivate: [AuthGuardService] },
   { path: 'myDayMeal', component: MyDayMealComponent, canActivate: [AuthGuardService] },
-  { path: 'addMeal', component: AddMealComponent, canActivate: [AuthGuardService] },
+  { path: 'addMeal', component: AddMealComponent, canActivate: [RoleGuardService], data: { expectedRole: 'Admin' }},
   { path: 'exercise', component: ExerciseComponent, canActivate: [AuthGuardService] },
   { path: 'myExercise', component: MyExerciseComponent, canActivate: [AuthGuardService] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
-  { path: 'adminMeal', component: AdminMealComponent, canActivate: [AuthGuardService] },
-  { path: 'adminProduct', component: AdminProductComponent, canActivate: [AuthGuardService] },
+  { path: 'adminMeal', component: AdminMealComponent, canActivate: [RoleGuardService], data: { expectedRole: 'Admin' }},
+  { path: 'adminProduct', component: AdminProductComponent, canActivate: [RoleGuardService], data: { expectedRole: 'Admin' }},
   { path: 'addProduct', component: AddProductComponent, canActivate: [AuthGuardService] },
-  { path: 'adminExercise', component: AdminExerciseComponent, canActivate: [AuthGuardService] },
-  { path: 'addExercise', component: AddExerciseComponent, canActivate: [AuthGuardService] },
+  { path: 'adminExercise', component: AdminExerciseComponent, canActivate: [RoleGuardService], data: { expectedRole: 'Admin' }},
+  { path: 'addExercise', component: AddExerciseComponent, canActivate: [RoleGuardService], data: { expectedRole: 'Admin' }},
 ];
 
 @NgModule({

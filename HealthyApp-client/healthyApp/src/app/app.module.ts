@@ -34,6 +34,7 @@ import { AddMealComponent } from './@modules/admin/admin-meal/add-meal/add-meal.
 import { MyExerciseComponent } from './@modules/exercise/my-exercise/my-exercise.component';
 import { MyDayMealComponent } from './@modules/meal/my-day-meal/my-day-meal.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { RoleGuardService } from './@shared/services/role-guard.service';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MealService,
     BookService,
     ExerciseService,
-    ErrorHandlerService
+    ErrorHandlerService,
+    RoleGuardService,
   ],
   bootstrap: [AppComponent]
 })

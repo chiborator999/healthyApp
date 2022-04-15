@@ -1,5 +1,6 @@
 ﻿namespace HealthyApp.Data.Models
 {
+    using HealthyApp.Data.Enum;
     using Microsoft.AspNetCore.Identity;
     using System.ComponentModel.DataAnnotations;
 
@@ -10,6 +11,7 @@
             this.MealUsers = new HashSet<MealUser>();
             this.Books = new HashSet<Book>();
             this.ExerciseUser = new HashSet<ExerciseUser>();
+            this.Role = RoleType.User;
         }
 
         [Required]
@@ -26,6 +28,8 @@
         public double Weight { get; set; }
 
         public double Height { get; set; }
+
+        public RoleType? Role { get; set; }
 
         public ICollection<MealUser> MealUsers { get; set; }
 

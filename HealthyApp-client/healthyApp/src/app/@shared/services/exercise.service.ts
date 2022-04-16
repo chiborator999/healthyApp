@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ExerciseService {
   headers: HttpHeaders;
+  deleteRequest: string = "DELETE";
 
   private createExercise = environment.apiUrl + '/Exercise/Create';
   private updateExercise = environment.apiUrl + '/Exercise/Update';
@@ -48,5 +49,22 @@ export class ExerciseService {
 
   getUserExercise(userId: any): Observable<any> {
     return this.http.get(this.getUserExercisesPath + '?userId=' + userId, {headers: this.headers});
+  }
+
+  removeUserExercise(data: any): Observable<any> {      
+    return this.DELETERequestWithBody('/Identity/RemoveUserExercise', data);
+ }
+
+  DELETERequestWithBody(requestTarget: string, body: any): Observable<any> {
+    let options = {
+        headers: this.headers,
+        body: body
+    };
+
+    return this.http.request(
+        this.deleteRequest,
+        environment.apiUrl + requestTarget,
+        options
+    );
   }
 }

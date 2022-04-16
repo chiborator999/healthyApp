@@ -27,6 +27,7 @@ export class MyDayMealComponent implements OnInit {
   userId: any;
   mealsKCalList: any;
   mealsTotalKCal: any;
+  delateData: any;
 
 
   @ViewChild(MatSort) sort!: MatSort;;
@@ -106,7 +107,7 @@ getData(){
     })
   }
 
-  getTotalDayMealsKCal(kCalArray: Array<string>): number {
+  getTotalDayMealsKCal(kCalArray: Array<any>): number {
     var sumTotalKCal = kCalArray.reduce((acc, cur) => acc + Number(cur), 0);
     return sumTotalKCal;
   }
@@ -114,10 +115,11 @@ getData(){
   delete(element:any){
     let result = confirm(`You are about to delete ${element.title}\n\n Are you sure?`);
     if(result){
-      this.mealService.remove(element.id).subscribe({
+      this.delateData = ({mealId: element.id, userId: this.userId});
+      this.mealService.removeUserMeal(this.delateData).subscribe({
         next: () => {
           this.getData();
-          this.snackbar.open(`successful delete meal with id: ${element.id}`, 'X', {
+          this.snackbar.open(`successful delete meal with id: ${element.id} for user with id: ${this.userId}`, 'X', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
             panelClass: 'successSnackbar'

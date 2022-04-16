@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MealService {
   headers: HttpHeaders;
+  deleteRequest: string = "DELETE";
 
   private createMeal = environment.apiUrl + '/Meal/Create';
   private updateMeal = environment.apiUrl + '/Meal/Update';
@@ -48,5 +49,22 @@ export class MealService {
 
   getUserMeals(userId: any): Observable<any> {
     return this.http.get(this.getUserMealsPath + '?userId=' + userId, {headers: this.headers});
+  }
+
+  removeUserMeal(data: any): Observable<any> {      
+    return this.DELETERequestWithBody('/Identity/RemoveUserMeal', data);
+  }
+
+  DELETERequestWithBody(requestTarget: string, body: any): Observable<any> {
+    let options = {
+        headers: this.headers,
+        body: body
+    };
+
+    return this.http.request(
+        this.deleteRequest,
+        environment.apiUrl + requestTarget,
+        options
+    );
   }
 }

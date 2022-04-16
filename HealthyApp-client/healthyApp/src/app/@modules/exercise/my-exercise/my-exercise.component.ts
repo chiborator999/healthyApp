@@ -25,6 +25,7 @@ export class MyExerciseComponent implements OnInit {
   fullName: any;
   totalKCal: any;
   totalKCalSpent: any;
+  delateData: any;
 
   @ViewChild(MatSort) sort!: MatSort;;
    
@@ -70,10 +71,11 @@ export class MyExerciseComponent implements OnInit {
   delete(element:any){
     let result = confirm(`You are about to delete ${element.title}\n\n Are you sure?`);
     if(result){
-      this.exerciseService.remove(element.id).subscribe({
+      this.delateData = ({exerciseId: element.id, userId: this.userId});
+      this.exerciseService.removeUserExercise(this.delateData).subscribe({
         next: () => {
           this.getData();
-          this.snackbar.open(`successful delete meal with id: ${element.id}`, 'X', {
+          this.snackbar.open(`successful delete exercise with id: ${element.id} for user with id: ${this.userId}`, 'X', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
             panelClass: 'successSnackbar'

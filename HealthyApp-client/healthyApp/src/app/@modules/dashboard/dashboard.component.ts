@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
       if(this.userBMI >= 18.5 && this.userBMI <= 24.9){
         this.BMImessage = "Congratulations, your weight is healthy";
       } else {
-        this.BMImessage = "The higher your BMI, the higher the risk to your health, your BMI must be between 18.5 and 24.9";
+        this.BMImessage = "Your BMI must be between 18.5 and 24.9";
       }
       this.userDailyCaloriesIntake = this.getCaloriesIntake(this.userWeight, this.userHeight, this.userAge, this.userGender);
     })

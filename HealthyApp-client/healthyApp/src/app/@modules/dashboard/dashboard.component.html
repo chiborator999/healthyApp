@@ -45,16 +45,17 @@
             </mat-panel-description>
             </mat-expansion-panel-header>
             <p *ngIf="this.userBMI >= 18.5 && this.userBMI <= 24.9">
-                Body Mass Index is a simple calculation using a person's height and weight.<br>
-                The formula is BMI = kg/m2 where kg is a person's weight in kilograms<br>
-                and m2 is their height in metres squared.<br>
-                A BMI of 25.0 or more is overweight, while the healthy range is 18.5 to 24.9.<br>
-                BMI applies to most adults 18-65 years.</p>
+                You are doing great, keep it up, eat healthy and move more.</p>
+            <p *ngIf="this.userBMI > 24.9">
+                Being overweight increases the risk of a number of serious diseases and health conditions<br>
+                - High blood pressure<br>
+                - Higher levels of LDL cholesterol<br>
+                - Lower levels of HDL cholesterol<br>
+                - High levels of triglycerides<br>
+                - Type II diabetes<br>
+                - Coronary heart disease<br>
+                - Stroke</p>
         </mat-expansion-panel>
 
-        </mat-accordion>
-    <!-- <div class="user-data">Welcome, {{getUserFullName()}}</div>
-    <div class="user-data">Daily Calories Intake: {{userDailyCaloriesIntake}}</div>
-    <div class="user-data">Your BMI index is: {{userBMI}}</div>
-    <div class="user-data">{{BMImessage}}</div> -->
-  </div>
+    </mat-accordion>
+</div>

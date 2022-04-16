@@ -1,7 +1,7 @@
 ﻿using HealthyApp.Data.Models;
 using HealthyApp.Interfaces;
-using HealthyApp.Models.ExerciseModel;
 using HealthyApp.Models.MealModel;
+using HealthyApp.Models.MealProductModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -65,7 +65,18 @@ namespace HealthyApp.Controllers
                     return BadRequest($"Meal with id: {mealModel.Id} can not be found!");
                 }
 
-                var updatedMeal = new Meal
+                var oldMeal = new MealRequestModel
+                {
+                    Id = meal.Id,
+                    MealType = meal.MealType,
+                    MealCategory = meal.MealCategory,
+                    Products = meal.Products.Select(p => new MealProductRequestModel()
+                    {
+                        ProductId = p.Id
+                    }).ToHashSet()
+                };
+
+                var updatedMeal = new MealRequestModel
                 {
                     Id = meal.Id,
                     MealType = mealModel.MealType,
@@ -74,14 +85,13 @@ namespace HealthyApp.Controllers
 
                 foreach (var item in mealModel.Products)
                 {
-                    updatedMeal.Products.Add(new MealProduct()
+                    updatedMeal.Products.Add(new MealProductRequestModel()
                     {
                         ProductId = item.ProductId,
-                        MealId = meal.Id
                     });
                 }
 
-                await _mealService.UpdateMealAsync(updatedMeal);
+                await _mealService.UpdateMealAsync(updatedMeal, oldMeal);
 
                 return Ok($"Successfuly updated Meal with id: {meal.Id}");
             }

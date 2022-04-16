@@ -8,7 +8,7 @@
         Task<IEnumerable<MealViewModel>> GetAllMealsAsync();
         Task<MealViewModel> GetMealByIdAsync(int mealId);
         Task CreateMealAsync(Meal meal);
-        Task UpdateMealAsync(Meal meal);
+        Task UpdateMealAsync(MealRequestModel meal, MealRequestModel oldMeal);
         Task RemoveMealAsync(int mealId);
     }
 }

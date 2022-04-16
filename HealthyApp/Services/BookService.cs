@@ -32,8 +32,9 @@
                                                         Id = b.Id,
                                                         Title = b.Title,
                                                         Author = b.Author,
-                                                        Url = b.Url
-                                                    });
+                                                        Url = b.Url,
+                                                        PerformerId = b.PerformerId,
+            });
 
             return booksViewList;
         }
@@ -52,7 +53,8 @@
                 Id = book.Id,
                 Title = book.Title,
                 Author = book.Author,
-                Url = book.Url
+                Url = book.Url,
+                PerformerId = book.PerformerId,
             };
 
             return bookViewById;

@@ -14,6 +14,8 @@
 
         public string Url { get; set; }
 
+        public string PerformerId { get; set; }
+
         public ICollection<User> Users { get; set; }
 
     }

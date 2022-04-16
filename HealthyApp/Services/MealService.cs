@@ -103,9 +103,32 @@
         await _ctx.SaveChangesAsync();
     }
 
-    public async Task UpdateMealAsync(Meal meal)
-    {
-        _ctx.Entry(meal).State = EntityState.Modified;
+    public async Task UpdateMealAsync(MealRequestModel meal, MealRequestModel oldMeal)
+        {
+            var oldMealProduct = oldMeal.Products.Select(p => new MealProduct
+            {
+                MealId = oldMeal.Id,
+                ProductId = p.ProductId
+            });
+
+            var newMealProduct = meal.Products.Select(p => new MealProduct
+            {
+                MealId = oldMeal.Id,
+                ProductId = p.ProductId
+            });
+
+            var newMeal = new Meal
+            {
+                Id = oldMeal.Id,
+                MealType = meal.MealType,
+                MealCategory = meal.MealCategory,
+                Products = newMealProduct.ToList(),
+            };
+
+        _ctx.MealProducts.RemoveRange(oldMealProduct);
+        _ctx.MealProducts.AddRange(newMealProduct);
+
+        _ctx.Entry(newMeal).State = EntityState.Modified;
         await _ctx.SaveChangesAsync();
     }
 }

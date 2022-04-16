@@ -14,5 +14,7 @@ namespace HealthyApp.Models.BookModel
 
         public string Url { get; set; }
 
+        public string PerformerId { get; set; }
+
     }
 }

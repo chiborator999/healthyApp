@@ -28,7 +28,8 @@ namespace HealthyApp.Controllers
                 {
                     Title = bookModel.Title,
                     Author = bookModel.Author,
-                    Url = bookModel.Url
+                    Url = bookModel.Url,
+                    PerformerId = bookModel.PerformerId,
                 };
 
                 await _bookService.CreateBookAsync(book);
@@ -59,7 +60,8 @@ namespace HealthyApp.Controllers
                     Id = book.Id,
                     Title = bookModel.Title,
                     Author = bookModel.Author,
-                    Url = bookModel.Url
+                    Url = bookModel.Url,
+                    PerformerId = book.PerformerId,
                 };
 
                 await _bookService.UpdateBookAsync(updatedBook);

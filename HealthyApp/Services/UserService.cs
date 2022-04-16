@@ -59,6 +59,19 @@
             return exerciseViewList;
         }
 
+        public async Task RemoveUserExerciseAsync(int exerciseId, string userId)
+        {
+            var exerciseUser = await _ctx.ExerciseUsers.FirstOrDefaultAsync(e => e.ExerciseId == exerciseId && e.UserId == userId);
+
+            if (exerciseUser is null)
+            {
+                throw new Exception($"Exercise with id: {exerciseId} does not exist for user with id: {userId}!");
+            }
+
+            _ctx.ExerciseUsers.Remove(exerciseUser);
+            await _ctx.SaveChangesAsync();
+        }
+
         public async Task AddMealToUserAsync(int mealId, string userId)
         {
             var user = _ctx.Users.FirstOrDefault(u => u.Id == userId);
@@ -122,9 +135,17 @@
             return userMealsViewList;
         }
 
-        public Task AddProductToUserAsync(int productId)
+        public async Task RemoveUserMealAsync(int mealId, string userId)
         {
-            throw new NotImplementedException();
+           var mealUser = await _ctx.MealUsers.FirstOrDefaultAsync(m => m.MealId == mealId && m.UserId == userId);
+
+            if (mealUser is null)
+            {
+                throw new Exception($"Meal with id: {mealId} does not exist for user with id: {userId}!");
+            }
+
+            _ctx.MealUsers.Remove(mealUser);
+            await _ctx.SaveChangesAsync();
         }
     }
 }

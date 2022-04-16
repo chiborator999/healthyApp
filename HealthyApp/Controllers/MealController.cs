@@ -1,5 +1,6 @@
 ﻿using HealthyApp.Data.Models;
 using HealthyApp.Interfaces;
+using HealthyApp.Models.ExerciseModel;
 using HealthyApp.Models.MealModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

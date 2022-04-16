@@ -4,6 +4,7 @@
     using HealthyApp.Interfaces;
     using HealthyApp.Models.ExerciseModel;
     using HealthyApp.Models.Identity;
+    using HealthyApp.Models.MealModel;
     using HealthyApp.Models.UserModel;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -188,6 +189,22 @@
         }
 
         [Authorize]
+        [HttpDelete]
+        [Route(nameof(RemoveUserExercise))]
+        public async Task<IActionResult> RemoveUserExercise([FromBody] RemoveUserExerciseModel exerciseUserModel)
+        {
+            try
+            {
+                await _userService.RemoveUserExerciseAsync(exerciseUserModel.exerciseId, exerciseUserModel.userId);
+                return Ok($"Successfuly remove Exercise with id: {exerciseUserModel.exerciseId} from user with id: {exerciseUserModel.userId}");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(await _logService.LogExceptionAsync(ex));
+            }
+        }
+
+        [Authorize]
         [HttpPost]
         [Route(nameof(AddMealToUser))]
         public async Task<IActionResult> AddMealToUser([FromBody] AddMealToUserRequestModel model)
@@ -204,6 +221,7 @@
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route(nameof(GetUserMeals))]
         public async Task<IActionResult> GetUserMeals(string userId)
@@ -211,6 +229,22 @@
             try
             {
                 return Ok(await _userService.GetAllMealsAsync(userId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(await _logService.LogExceptionAsync(ex));
+            }
+        }
+
+        [Authorize]
+        [HttpDelete]
+        [Route(nameof(RemoveUserMeal))]
+        public async Task<IActionResult> RemoveUserMeal([FromBody] RemoveUserMealModel mealUserModel)
+        {
+            try
+            {
+                await _userService.RemoveUserMealAsync(mealUserModel.mealId, mealUserModel.userId);
+                return Ok($"Successfuly remove Meal with id: {mealUserModel.mealId} from user with id: {mealUserModel.userId}");
             }
             catch (Exception ex)
             {

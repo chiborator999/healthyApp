@@ -1,0 +1,13 @@
+form {
+    border: 3px solid rgba($color: #37be4e, $alpha: 1.0);
+    border-radius: 10px;
+    padding: 10% 15%;
+    margin-top: 10%;
+    margin-bottom: 20px;
+
+    .alert {
+        font-size: 14px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+}

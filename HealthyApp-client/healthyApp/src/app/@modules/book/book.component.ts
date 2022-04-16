@@ -63,9 +63,14 @@ export class BookComponent implements OnInit {
       })
   }
 
-  add(){
+  add() {
     this.router.navigate(['/addBook']);
   }
+
+  edit(element: any) {
+    this.router.navigate(['/editBook', element.id]);
+  }
+    
     
   delete(element:any){
     let result = confirm(`You are about to delete ${element.title}\n\n Are you sure?`);

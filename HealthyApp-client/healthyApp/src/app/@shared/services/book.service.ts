@@ -30,7 +30,7 @@ export class BookService {
   }
 
   update(data: any): Observable<any> {
-    return this.http.post(this.updateBook, data, {headers: this.headers});
+    return this.http.put(this.updateBook, data, {headers: this.headers});
   }
 
   remove(bookId: any): Observable<any> {

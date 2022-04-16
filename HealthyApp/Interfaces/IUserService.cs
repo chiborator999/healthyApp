@@ -9,7 +9,7 @@ namespace HealthyApp.Interfaces
         Task AddExerciseToUserAsync(int exerciseId, string userId);
         Task<IEnumerable<ExerciseViewModel>> GetAllExercisesAsync(string userId);
         Task<IEnumerable<MealViewModel>> GetAllMealsAsync(string userId);
-        Task RemoveUserMealAsync(int mealId, string userId);
+        Task RemoveUserMealAsync(List<RemoveUserMealModel> mealsUserModel);
         Task RemoveUserExerciseAsync(int exerciseId, string userId);
     }
 }

@@ -239,12 +239,19 @@
         [Authorize]
         [HttpDelete]
         [Route(nameof(RemoveUserMeal))]
-        public async Task<IActionResult> RemoveUserMeal([FromBody] RemoveUserMealModel mealUserModel)
+        public async Task<IActionResult> RemoveUserMeal([FromBody] List<RemoveUserMealModel> mealsUserModel)
         {
             try
             {
-                await _userService.RemoveUserMealAsync(mealUserModel.mealId, mealUserModel.userId);
-                return Ok($"Successfuly remove Meal with id: {mealUserModel.mealId} from user with id: {mealUserModel.userId}");
+                await _userService.RemoveUserMealAsync(mealsUserModel);
+                if(mealsUserModel.Count == 1)
+                {
+                    return Ok($"Successfuly remove Meal with id: {mealsUserModel[0].mealId} from user with id: {mealsUserModel[0].userId}");
+                }
+                else
+                {
+                    return Ok($"Successfuly remove All Meals from user with id: {mealsUserModel[0].userId}");
+                }
             }
             catch (Exception ex)
             {

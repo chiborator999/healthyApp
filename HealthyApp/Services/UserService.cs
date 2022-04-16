@@ -135,16 +135,20 @@
             return userMealsViewList;
         }
 
-        public async Task RemoveUserMealAsync(int mealId, string userId)
+        public async Task RemoveUserMealAsync(List<RemoveUserMealModel> mealsUserModel)
         {
-           var mealUser = await _ctx.MealUsers.FirstOrDefaultAsync(m => m.MealId == mealId && m.UserId == userId);
-
-            if (mealUser is null)
+            foreach (var userMeal in mealsUserModel)
             {
-                throw new Exception($"Meal with id: {mealId} does not exist for user with id: {userId}!");
+                var mealUser = await _ctx.MealUsers.FirstOrDefaultAsync(m => m.MealId == userMeal.mealId && m.UserId == userMeal.userId);
+
+                if (mealUser is null)
+                {
+                    throw new Exception($"Meal with id: {userMeal.mealId} does not exist for user with id: {userMeal.userId}!");
+                }
+
+                _ctx.MealUsers.Remove(mealUser);
             }
 
-            _ctx.MealUsers.Remove(mealUser);
             await _ctx.SaveChangesAsync();
         }
     }

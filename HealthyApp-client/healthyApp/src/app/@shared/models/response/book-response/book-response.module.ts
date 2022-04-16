@@ -3,4 +3,5 @@ export class BookResponseModule {
   title: string;
   author: string;
   url: string;
+  performerId: string;
 }

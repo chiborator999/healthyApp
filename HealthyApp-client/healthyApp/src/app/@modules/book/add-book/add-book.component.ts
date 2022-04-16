@@ -35,7 +35,7 @@ export class AddBookComponent implements OnInit {
   }
 
   onSubmit(data: any): void{
-    this.bookService.create({Title: data.title, Author: data.author, Url: data.url })
+    this.bookService.create({Title: data.title, Author: data.author, Url: data.url, PerformerId: this.userData.id })
       .subscribe({ 
         next: response => {
           this.snackbar.open(`${response}`, 'X', {

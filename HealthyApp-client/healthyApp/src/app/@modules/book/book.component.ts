@@ -19,8 +19,10 @@ export class BookComponent implements OnInit {
   displayedColumns: string[] = ['title', 'author', 'url', 'action'];
   loading: boolean = false;
   books: any;
+  booksPerformerId: any;
   isUserLoggedIns: boolean;
   userData: any;
+  userId: any;
   isAdmin: boolean;
   https = 'https://'
 
@@ -37,6 +39,7 @@ export class BookComponent implements OnInit {
   ngOnInit(): void {;
     this.authService.isUserAdmin.subscribe( value => {
       this.userData = value;
+      this.userId = this.userData.id;
       if(this.userData.role === 'Admin'){
         this.isAdmin = true;
       }

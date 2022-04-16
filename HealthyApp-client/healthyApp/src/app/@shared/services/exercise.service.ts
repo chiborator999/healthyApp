@@ -32,7 +32,7 @@ export class ExerciseService {
   }
 
   update(data: any): Observable<any> {
-    return this.http.post(this.updateExercise, data, {headers: this.headers});
+    return this.http.put(this.updateExercise, data, {headers: this.headers});
   }
 
   remove(exerciseId: any): Observable<any> {

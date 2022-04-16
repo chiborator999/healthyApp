@@ -55,8 +55,12 @@ export class AdminExerciseComponent implements OnInit {
     })
   }
 
-  add(){
+  add() {
     this.router.navigate(['/addExercise']);
+  }
+
+  edit(element: any) {
+    this.router.navigate(['/editExercise', element.id]);
   }
 
   delete(element:any){

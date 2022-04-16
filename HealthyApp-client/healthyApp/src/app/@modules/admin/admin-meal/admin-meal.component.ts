@@ -100,6 +100,10 @@ export class AdminMealComponent implements OnInit {
     this.router.navigate(['/addMeal']);
   }
 
+  edit(element: any) {
+    this.router.navigate(['/editMeal', element.id]);
+  }
+
   delete(element:any){
     let result = confirm(`You are about to delete ${element.title}\n\n Are you sure?`);
     if(result){

@@ -38,6 +38,7 @@ import { RoleGuardService } from './@shared/services/role-guard.service';
 import { EditExerciseComponent } from './@modules/admin/admin-exercise/edit-exercise/edit-exercise.component';
 import { EditProductComponent } from './@modules/admin/admin-product/edit-product/edit-product.component';
 import { EditBookComponent } from './@modules/book/edit-book/edit-book.component';
+import { EditMealComponent } from './@modules/admin/admin-meal/edit-meal/edit-meal.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { EditBookComponent } from './@modules/book/edit-book/edit-book.component
     EditExerciseComponent,
     EditProductComponent,
     EditBookComponent,
+    EditMealComponent,
   ],
   imports: [
     BrowserModule,

@@ -32,7 +32,7 @@ export class MealService {
   }
 
   update(data: any): Observable<any> {
-    return this.http.post(this.updateMeal, data, {headers: this.headers});
+    return this.http.put(this.updateMeal, data, {headers: this.headers});
   }
 
   remove(mealId: any): Observable<any> {

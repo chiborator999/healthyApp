@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { elementAt } from 'rxjs';
 import { AddExerciseComponent } from './@modules/admin/admin-exercise/add-exercise/add-exercise.component';
 import { AdminExerciseComponent } from './@modules/admin/admin-exercise/admin-exercise.component';
 import { EditExerciseComponent } from './@modules/admin/admin-exercise/edit-exercise/edit-exercise.component';
 import { AddMealComponent } from './@modules/admin/admin-meal/add-meal/add-meal.component';
 import { AdminMealComponent } from './@modules/admin/admin-meal/admin-meal.component';
+import { EditMealComponent } from './@modules/admin/admin-meal/edit-meal/edit-meal.component';
 import { AddProductComponent } from './@modules/admin/admin-product/add-product/add-product.component';
 import { AdminProductComponent } from './@modules/admin/admin-product/admin-product.component';
 import { EditProductComponent } from './@modules/admin/admin-product/edit-product/edit-product.component';
@@ -34,6 +34,7 @@ const routes: Routes = [
   { path: 'meal', component: MealComponent, canActivate: [AuthGuardService] },
   { path: 'myDayMeal', component: MyDayMealComponent, canActivate: [AuthGuardService] },
   { path: 'addMeal', component: AddMealComponent, canActivate: [RoleGuardService], data: { expectedRole: 'Admin' }},
+  { path: 'editMeal/:id', component: EditMealComponent, canActivate: [RoleGuardService], data: { expectedRole: 'Admin' }},
   { path: 'exercise', component: ExerciseComponent, canActivate: [AuthGuardService] },
   { path: 'myExercise', component: MyExerciseComponent, canActivate: [AuthGuardService] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },

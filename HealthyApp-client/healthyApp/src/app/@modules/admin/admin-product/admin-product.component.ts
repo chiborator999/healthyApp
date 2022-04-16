@@ -64,9 +64,14 @@ export class AdminProductComponent implements OnInit {
     })
   }
 
-  add(){
+  add() {
     this.router.navigate(['/addProduct']);
   }
+
+  edit(element: any) {
+    this.router.navigate(['/editProduct', element.id]);
+  }
+
 
   delete(element:any){
     let result = confirm(`You are about to delete ${element.title}\n\n Are you sure?`);

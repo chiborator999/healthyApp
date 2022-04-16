@@ -30,7 +30,7 @@ export class ProductService {
   }
 
   update(data: any): Observable<any> {
-    return this.http.post(this.updateProduct, data, {headers: this.headers});
+    return this.http.put(this.updateProduct, data, {headers: this.headers});
   }
 
   remove(productId: any): Observable<any> {

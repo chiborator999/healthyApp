@@ -35,6 +35,9 @@ import { MyExerciseComponent } from './@modules/exercise/my-exercise/my-exercise
 import { MyDayMealComponent } from './@modules/meal/my-day-meal/my-day-meal.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RoleGuardService } from './@shared/services/role-guard.service';
+import { EditExerciseComponent } from './@modules/admin/admin-exercise/edit-exercise/edit-exercise.component';
+import { EditProductComponent } from './@modules/admin/admin-product/edit-product/edit-product.component';
+import { EditBookComponent } from './@modules/book/edit-book/edit-book.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,9 @@ import { RoleGuardService } from './@shared/services/role-guard.service';
     AddMealComponent,
     MyExerciseComponent,
     MyDayMealComponent,
+    EditExerciseComponent,
+    EditProductComponent,
+    EditBookComponent,
   ],
   imports: [
     BrowserModule,

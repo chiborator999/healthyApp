@@ -12,7 +12,7 @@
 
     <ng-container matColumnDef="title">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+      <mat-cell *matCellDef="let element" style="color: rgb(202, 82, 39)"> {{element.title}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="author">
@@ -22,7 +22,7 @@
     
     <ng-container matColumnDef="url">
       <mat-header-cell *matHeaderCellDef> Url </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.url}} </mat-cell>
+      <mat-cell *matCellDef="let element"><a target="_blank" href={{https}}{{element.url}}>Go to book store</a></mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="action">

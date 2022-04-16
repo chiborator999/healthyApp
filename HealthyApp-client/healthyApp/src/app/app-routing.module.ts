@@ -20,6 +20,7 @@ import { AuthGuardService } from './@shared/services/auth-guard.service';
 import { RoleGuardService } from './@shared/services/role-guard.service';
 
 const routes: Routes = [
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },

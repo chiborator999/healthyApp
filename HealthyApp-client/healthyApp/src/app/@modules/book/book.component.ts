@@ -22,6 +22,7 @@ export class BookComponent implements OnInit {
   isUserLoggedIns: boolean;
   userData: any;
   isAdmin: boolean;
+  https = 'https://'
 
   @ViewChild(MatSort) sort!: MatSort;;
    

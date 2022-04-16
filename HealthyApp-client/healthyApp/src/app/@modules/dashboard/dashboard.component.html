@@ -1,11 +1,12 @@
 <div class="container-fluid" fxLayout="column" fxLayoutAlign="space-evenly center">
+    <img src="../../../assets/img/healthyAppMainLogo.png" alt="" width="250" height="150" class="d-inline-block align-text-top">
     <div class="user-data">Welcome, {{getUserFullName()}}</div>
     <mat-accordion>
 
         <mat-expansion-panel>
             <mat-expansion-panel-header>
             <mat-panel-title>
-                Daily Calories Intake: {{userDailyCaloriesIntake}}
+                Daily Calories Intake: <span style="color: rgb(90, 219, 4);">{{userDailyCaloriesIntake}}</span>
             </mat-panel-title>
             <mat-panel-description>
                 What is Harris Benedict equation based on?
@@ -21,7 +22,7 @@
         <mat-expansion-panel>
             <mat-expansion-panel-header>
             <mat-panel-title>              
-                Your BMI index is: {{userBMI}}
+                Your BMI index is: <span style="color: rgb(90, 219, 4);">{{userBMI}}</span> 
             </mat-panel-title>
             <mat-panel-description>
                 How BMI is calculated?

@@ -2,10 +2,10 @@
     <div class="row">
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
-            <div class="title">
-                <h1>Register</h1>
-            </div>
             <form [formGroup]="registerForm" (ngSubmit)="register()">
+                <div class="title">
+                    <h3>Register</h3>
+                </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Username</label>
                     <input type="text" class="form-control" formControlName="username">
@@ -50,7 +50,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Gender</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="gender">
+                    <select class="form-control" formControlName="gender">
+                        <option value="" disabled>Choose Gender</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>  
+                    </select>
                 </div>
                 <div *ngIf="registerForm.get('gender')?.touched && registerForm.get('gender')?.errors?.['required']" class="alert alert-danger">
                     Gender field is required!

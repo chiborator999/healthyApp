@@ -2,12 +2,31 @@ form {
     border: 3px solid rgba($color: #37be4e, $alpha: 1.0);
     border-radius: 10px;
     padding: 10% 15%;
-    margin-top: 30%;
-    margin-bottom: 20%;
+    margin-top: 15%;
+    margin-bottom: 15%;
 
     .alert {
         font-size: 14px;
         padding-top: 3px;
         padding-bottom: 3px;
     }
+
+    .title {
+        text-align: center;
+    }
+
+    .sign-up {
+        margin-top: 15px;
+    }
+
+    a{
+        display: inline;
+        text-decoration: none;
+        color: #6fa33e;
+    }
+    
+    a:hover{
+        color: #e0a118;
+        cursor: pointer;
+    }    
 }
